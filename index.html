@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Chrome UI (hover devices only): credit badge with idle-fade.
+    // Deferred until body exists since the script may run in <head>.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initChromeUI);
+    } else {
+        initChromeUI();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: oklch(10% 0.012 260);
+            --surface: oklch(15% 0.012 260);
+            --surface-raised: oklch(19% 0.012 260);
+            --border: oklch(25% 0.01 260);
+            --text-primary: oklch(92% 0.006 260);
+            --text-secondary: oklch(62% 0.01 260);
+            --text-tertiary: oklch(45% 0.01 260);
+            --accent: oklch(78% 0.14 55);
+            --accent-dim: oklch(65% 0.1 55);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-optical-sizing: auto;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .site-header {
+            padding: 48px 32px 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .site-header h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            color: var(--text-primary);
+            text-wrap: balance;
+        }
+
+        .site-header p {
+            margin-top: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            font-weight: 300;
+            max-width: 45ch;
+        }
+
+        /* Navigation */
+        .media-nav {
+            padding: 0 32px;
+            max-width: 1400px;
+            margin: 32px auto 0;
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0;
+        }
+
+        .media-nav button {
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s var(--ease-out-expo);
+        }
+
+        .media-nav button:hover {
+            color: var(--text-secondary);
+        }
+
+        .media-nav button.active {
+            color: var(--accent);
+        }
+
+        .media-nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px 1px 0 0;
+        }
+
+        /* Content Sections */
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 32px 80px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+
+        .video-item {
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--surface);
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .video-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: oklch(8% 0.01 260);
+        }
+
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        .video-placeholder svg {
+            width: 48px;
+            height: 48px;
+            opacity: 0.5;
+        }
+
+        .video-info {
+            padding: 16px 20px;
+        }
+
+        .video-info h3 {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .video-info span {
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Image Gallery */
+        .gallery-grid {
+            columns: 4;
+            column-gap: 16px;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s var(--ease-out-expo), filter 0.4s var(--ease-out-expo);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, oklch(0% 0 0 / 0.5) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s var(--ease-out-expo);
+            pointer-events: none;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: oklch(5% 0.01 260 / 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s var(--ease-out-expo);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            transform: scale(0.92);
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+
+        .lightbox.open img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1.25rem;
+        }
+
+        .lightbox-close:hover {
+            background: var(--border);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--border);
+        }
+
+        .lightbox-nav.prev { left: 24px; }
+        .lightbox-nav.next { right: 24px; }
+
+        /* Upload hint */
+        .upload-hint {
+            margin-top: 48px;
+            padding: 32px;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        .upload-hint strong {
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        /* Empty state */
+        .empty-state {
+            padding: 80px 32px;
+            text-align: center;
+            color: var(--text-tertiary);
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            opacity: 0.4;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .gallery-grid { columns: 3; }
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid { columns: 2; }
+            .video-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .site-header { padding: 32px 20px 24px; }
+            .media-nav { padding: 0 20px; overflow-x: auto; }
+            .content { padding: 24px 20px 60px; }
+            .gallery-grid { columns: 1; column-gap: 12px; }
+            .gallery-item { margin-bottom: 12px; }
+            .video-grid { gap: 16px; }
+            .video-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Staggered entrance */
+        .gallery-item {
+            animation: fadeUp 0.5s var(--ease-out-expo) both;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0ms; }
+        .gallery-item:nth-child(2) { animation-delay: 50ms; }
+        .gallery-item:nth-child(3) { animation-delay: 100ms; }
+        .gallery-item:nth-child(4) { animation-delay: 150ms; }
+        .gallery-item:nth-child(5) { animation-delay: 200ms; }
+        .gallery-item:nth-child(6) { animation-delay: 250ms; }
+        .gallery-item:nth-child(7) { animation-delay: 300ms; }
+        .gallery-item:nth-child(8) { animation-delay: 350ms; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <h1>Media Gallery</h1>
+        <p>A collection of videos and photographs.</p>
+    </header>
+
+    <nav class="media-nav">
+        <button class="active" data-tab="images">Images</button>
+        <button data-tab="videos">Videos</button>
+    </nav>
+
+    <main class="content">
+        <!-- Images Section -->
+        <section class="section active" id="images">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80" alt="Landscape with mountains and lake" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80" alt="Sunlit valley" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&q=80" alt="Forest path" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=600&q=80" alt="Waterfall in green forest" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" alt="Mountain lake at sunset" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80" alt="Foggy forest" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=80" alt="Rolling green hills" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1465056836900-8f1561b7cac5?w=600&q=80" alt="Ocean coastline" loading="lazy">
+                </div>
+            </div>
+
+            <div class="upload-hint">
+                <strong>Add your own images</strong>
+                Replace the placeholder &lt;img&gt; src attributes with your own image file paths or URLs.
+                For local files, place them in an "images" folder and reference as "images/your-photo.jpg"
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section class="section" id="videos">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <!-- Replace with your YouTube/Vimeo embed or local video -->
+                        <div class="video-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            <span>Replace with your video embed URL</span>
+                        </div>
+                        <!--
+                            YouTube: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+                            Vimeo: <iframe src="https://player.vimeo.com/video/VIDEO_ID" allowfullscreen></iframe>
+                            Local: <video src="videos/your-video.mp4" controls></video>
+                        -->
+                    </div>
+                    <div class="video-info">
+                        <h3>Video Title</h3>
+                        <span>Add description here</span>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <div class="video-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            <span>Replace with your video embed URL</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Video Title</h3>
+                        <span>Add description here</span>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <div class="video-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            <span>Replace with your video embed URL</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Video Title</h3>
+                        <span>Add description here</span>
+                    </div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <div class="video-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            <span>Replace with your video embed URL</span>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Video Title</h3>
+                        <span>Add description here</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upload-hint">
+                <strong>Add your own videos</strong>
+                Replace the placeholder divs with an &lt;iframe&gt; for YouTube/Vimeo or a &lt;video&gt; tag for local files.
+                YouTube example: &lt;iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen&gt;&lt;/iframe&gt;
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&#x2715;</button>
+        <button class="lightbox-nav prev" aria-label="Previous">&#x2039;</button>
+        <button class="lightbox-nav next" aria-label="Next">&#x203A;</button>
+        <img src="" alt="Full size image">
+    </div>
+
+    <script>
+        // Tab switching
+        const tabs = document.querySelectorAll('.media-nav button');
+        const sections = document.querySelectorAll('.section');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        let currentIndex = 0;
+
+        galleryItems.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentIndex = index;
+                openLightbox(img.src.replace('w=600', 'w=1400'));
+            });
+        });
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        lightbox.querySelector('.prev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentIndex].src.replace('w=600', 'w=1400');
+        });
+
+        lightbox.querySelector('.next').addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentIndex].src.replace('w=600', 'w=1400');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightbox.querySelector('.prev').click();
+            if (e.key === 'ArrowRight') lightbox.querySelector('.next').click();
+        });
+    </script>
+</body>
+</html>
