@@ -1135,8 +1135,8 @@ var disqus_config = function () {
         });
 
         // View counter using hits.sh (free)
-        // Replace YOUR_DOMAIN with your actual domain
-        fetch('https://hits.sh/asiantitstok.com/')
+      // Replace YOUR_DOMAIN with your actual domain
+        fetch('https://hits.sh/asiantitstok.com/hit.json')
             .then(r => r.json())
             .then(data => {
                 document.getElementById('visit-count').textContent = data.total || '0';
