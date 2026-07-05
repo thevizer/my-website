@@ -1,18 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-75M3EK7TCN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-75M3EK7TCN');
-</script>
-  <meta name="google-adsense-account" content="ca-pub-8574183558034654">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8574183558034654"
-     crossorigin="anonymous"></script>
 <!-- skill:chrome -->
 <style>
 /* Credit line — bottom-right */
@@ -51,15 +39,19 @@
 </style>
 <script>
 (function () {
-    // Chrome UI (hover devices only): credit badge with idle-fade.
-    // Deferred until body exists since the script may run in <head>.
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
     function initChromeUI() {
         if (!matchMedia('(hover: hover)').matches) return;
 
         var credit = document.createElement('div');
         credit.className = 'design-ui-credit';
         credit.setAttribute('aria-hidden', 'true');
-        credit.innerHTML = '\u{1F49C} facelesskappa';
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
         document.body.appendChild(credit);
 
         var timer = null;
@@ -73,1085 +65,1384 @@
         document.addEventListener('mousemove', show);
         show();
     }
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initChromeUI);
-    } else {
+
+    function init() {
+        markEditable();
         initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 })();
 
 </script>
 <!-- /skill:chrome -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TitsTok</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --bg: oklch(7% 0.015 320);
-            --surface: oklch(12% 0.014 320);
-            --surface-raised: oklch(16% 0.013 320);
-            --border: oklch(22% 0.012 320);
-            --border-gold: oklch(55% 0.08 75);
-            --text-primary: oklch(92% 0.008 75);
-            --text-secondary: oklch(65% 0.01 320);
-            --text-tertiary: oklch(42% 0.01 320);
-            --gold: oklch(78% 0.11 75);
-            --gold-dim: oklch(62% 0.09 75);
-            --gold-soft: oklch(78% 0.11 75 / 0.1);
-            --kofi: oklch(68% 0.1 75);
-            --kofi-hover: oklch(60% 0.1 75);
-            --sponsor-bg: oklch(10% 0.012 320);
-            --sponsor-border: oklch(25% 0.02 75);
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            font-optical-sizing: auto;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3, .section-heading {
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        /* Banner */
-        .banner {
-            position: relative;
-            width: 100%;
-            height: clamp(220px, 38vw, 400px);
-            overflow: hidden;
-        }
-
-        .banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .banner-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                oklch(7% 0.015 320 / 0.1) 0%,
-                oklch(7% 0.015 320 / 0.9) 100%
-            );
-        }
-
-        .banner-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 40px 32px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .banner-text h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            color: var(--text-primary);
-            text-wrap: balance;
-        }
-
-        .banner-text p {
-            margin-top: 10px;
-            font-size: clamp(0.8125rem, 2vw, 0.9375rem);
-            color: var(--text-secondary);
-            font-weight: 300;
-            max-width: 50ch;
-            letter-spacing: 0.02em;
-        }
-
-        /* Banner actions */
-        .banner-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-
-        /* View counter */
-        .view-counter {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            background: oklch(7% 0.015 320 / 0.7);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.02em;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-
-        .view-counter svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--gold-dim);
-        }
-
-        .view-counter strong {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        /* Ko-fi Button */
-        .kofi-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 11px 22px;
-            background: transparent;
-            border: 1px solid var(--gold-dim);
-            color: var(--gold);
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            white-space: nowrap;
-            transition: all 0.3s var(--ease-out-expo);
-            flex-shrink: 0;
-        }
-
-        .kofi-btn:hover {
-            background: var(--gold-soft);
-            border-color: var(--gold);
-            transform: translateY(-1px);
-        }
-
-        .kofi-btn:active {
-            transform: translateY(0);
-        }
-
-        .kofi-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        /* Social Links Bar */
-        .social-bar {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 32px;
-        }
-
-        .social-bar-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.04em;
-            transition: color 0.2s var(--ease-out-expo);
-        }
-
-        .social-link:hover {
-            color: var(--gold);
-        }
-
-        .social-link svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        /* Sponsor Ad Slots */
-        .ad-slot {
-            display: block;
-            border: 1px dashed var(--sponsor-border);
-            border-radius: 4px;
-            background: var(--sponsor-bg);
-            text-align: center;
-            overflow: hidden;
-            transition: border-color 0.2s;
-        }
-
-        .ad-slot:hover {
-            border-color: var(--gold-dim);
-        }
-
-        .ad-slot img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .ad-slot-placeholder {
-            padding: 20px 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .ad-slot-placeholder .ad-label {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gold-dim);
-            opacity: 0.7;
-        }
-
-        .ad-slot-placeholder .ad-size {
-            font-size: 0.6875rem;
-            color: var(--text-tertiary);
-            opacity: 0.5;
-        }
-
-        .ad-leaderboard {
-            max-width: 1200px;
-            margin: 24px auto 0;
-            padding: 0 32px;
-        }
-
-        .ad-leaderboard .ad-slot {
-            width: 100%;
-            min-height: 90px;
-        }
-
-        .ad-inline {
-            min-height: 250px;
-        }
-
-        .ad-mid-content {
-            margin: 32px 0;
-        }
-
-        .ad-mid-content .ad-slot {
-            width: 100%;
-            min-height: 100px;
-        }
-
-        .ad-footer {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 32px 0;
-        }
-
-        .ad-footer .ad-slot {
-            width: 100%;
-            min-height: 90px;
-        }
-
-        /* Tabs */
-        .tabs-wrapper {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tabs {
-            display: flex;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            padding: 0 32px;
-            gap: 0;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .tabs::-webkit-scrollbar {
-            display: none;
-        }
-
-        .tab {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.6875rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            white-space: nowrap;
-            color: var(--text-tertiary);
-            background: none;
-            border: none;
-            padding: 18px 20px;
-            cursor: pointer;
-            position: relative;
-            transition: color 0.3s var(--ease-out-expo);
-            flex-shrink: 0;
-        }
-
-        .tab:hover {
-            color: var(--text-secondary);
-        }
-
-        .tab.active {
-            color: var(--gold);
-        }
-
-        .tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 16px;
-            right: 16px;
-            height: 1px;
-            background: var(--gold);
-        }
-
-        /* Main Content */
-        .main {
-            padding: 36px 32px 48px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Tab Panels */
-        .tab-panel {
-            display: none;
-        }
-
-        .tab-panel.active {
-            display: block;
-            animation: fadeIn 0.4s var(--ease-out-expo);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Video Grid */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .video-card {
-            background: var(--surface);
-            border-radius: 6px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: transform 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
-        }
-
-        .video-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-gold);
-            box-shadow: 0 20px 60px oklch(0% 0 0 / 0.4);
-        }
-
-        .video-embed {
-            position: relative;
-            padding-bottom: 56.25%;
-            background: oklch(5% 0.01 320);
-        }
-
-        .video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-embed .placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: var(--text-tertiary);
-            font-size: 0.8125rem;
-        }
-
-        .video-embed .placeholder svg {
-            width: 36px;
-            height: 36px;
-            opacity: 0.3;
-            stroke: var(--gold-dim);
-        }
-
-        .video-meta {
-            padding: 16px 18px 18px;
-        }
-
-        .video-meta h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.125rem;
-            font-weight: 500;
-            line-height: 1.3;
-            margin-bottom: 4px;
-            color: var(--text-primary);
-        }
-
-        .video-meta p {
-            font-size: 0.8125rem;
-            color: var(--text-tertiary);
-            font-weight: 300;
-            letter-spacing: 0.01em;
-        }
-
-        /* Section heading */
-        .section-heading {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gold-dim);
-            margin-bottom: 24px;
-        }
-
-        /* Affiliate Picks */
-        .affiliate-section {
-            margin-top: 48px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
-        }
-
-        .affiliate-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .affiliate-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 16px;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .affiliate-item:hover {
-            border-color: var(--border-gold);
-            transform: translateY(-2px);
-        }
-
-        .affiliate-img {
-            width: 100%;
-            aspect-ratio: 1;
-            background: oklch(10% 0.01 320);
-            border-radius: 4px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .affiliate-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .affiliate-img .placeholder-icon {
-            color: var(--text-tertiary);
-            opacity: 0.3;
-            font-size: 0.75rem;
-        }
-
-        .affiliate-item h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .affiliate-item .affiliate-price {
-            font-size: 0.75rem;
-            color: var(--gold-dim);
-            font-weight: 500;
-        }
-
-        .affiliate-item .affiliate-tag {
-            font-size: 0.625rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-tertiary);
-            opacity: 0.7;
-        }
-
-        /* Comments Section */
-        .comments-section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 48px 32px;
-            border-top: 1px solid var(--border);
-        }
-
-        .comments-section h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .comments-placeholder {
-            padding: 40px 24px;
-            border: 1px dashed var(--border);
-            border-radius: 6px;
-            text-align: center;
-            color: var(--text-tertiary);
-            font-size: 0.8125rem;
-            line-height: 1.8;
-        }
-
-        .comments-placeholder code {
-            display: block;
-            margin-top: 12px;
-            padding: 12px 16px;
-            background: var(--surface);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            text-align: left;
-            overflow-x: auto;
-        }
-
-        /* Footer */
-        .site-footer {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 32px 32px 48px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .footer-copy {
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-links a {
-            font-size: 0.6875rem;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            letter-spacing: 0.04em;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold-dim);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .banner {
-                height: 240px;
-            }
-
-            .banner-content {
-                padding: 28px 20px;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .banner-actions {
-                flex-direction: row;
-            }
-
-            .social-bar {
-                padding: 12px 20px;
-            }
-
-            .social-bar-inner {
-                gap: 16px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .tabs {
-                padding: 0 20px;
-            }
-
-            .tab {
-                padding: 16px 14px;
-                font-size: 0.625rem;
-            }
-
-            .main {
-                padding: 24px 20px 40px;
-            }
-
-            .video-grid {
-                grid-template-columns: 1fr;
-                gap: 18px;
-            }
-
-            .affiliate-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .ad-leaderboard,
-            .ad-footer {
-                padding: 0 20px;
-            }
-
-            .comments-section {
-                padding: 40px 20px;
-            }
-
-            .site-footer {
-                flex-direction: column;
-                text-align: center;
-                padding: 24px 20px 40px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .banner {
-                height: 200px;
-            }
-
-            .affiliate-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .video-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .affiliate-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-    </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75M3EK7TCN"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75M3EK7TCN');
+</script>
+<!-- Google Adsense -->
+<meta name="google-adsense-account" content="ca-pub-8574183558034654">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8574183558034654" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b0f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)">
+<title>Asian TitsTok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== CUSTOM CURSOR (desktop only) ===== */
+@media (hover: hover) and (pointer: fine) {
+  html, body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23c9a96e' stroke-width='1.5' opacity='0.8'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23c9a96e' opacity='0.9'/%3E%3C/svg%3E") 12 12, auto;
+  }
+  a, button, .x-post-card, .video-card {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='12' fill='%23c9a96e' opacity='0.15'/%3E%3Ccircle cx='14' cy='14' r='8' fill='none' stroke='%23c9a96e' stroke-width='1.5' opacity='0.9'/%3E%3Ccircle cx='14' cy='14' r='3' fill='%23c9a96e'/%3E%3C/svg%3E") 14 14, pointer;
+  }
+}
+
+/* ===== THEME VARIABLES ===== */
+:root {
+  --transition-theme: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+[data-theme="dark"] {
+  --bg: oklch(5% 0.012 320);
+  --bg-alpha: oklch(5% 0.012 320 / 0.92);
+  --surface: oklch(10% 0.012 320);
+  --surface-raised: oklch(14% 0.011 320);
+  --border: oklch(20% 0.01 320);
+  --border-glow: oklch(50% 0.07 75);
+  --text-primary: oklch(93% 0.006 75);
+  --text-secondary: oklch(62% 0.008 320);
+  --text-tertiary: oklch(38% 0.008 320);
+  --gold: oklch(80% 0.12 75);
+  --gold-dim: oklch(60% 0.09 75);
+  --gold-soft: oklch(80% 0.12 75 / 0.08);
+  --overlay-bg: oklch(2% 0.008 320 / 0.96);
+  --card-shadow: oklch(0% 0 0 / 0.5);
+  --glow-opacity: 1;
+}
+
+[data-theme="light"] {
+  --bg: oklch(97% 0.005 75);
+  --bg-alpha: oklch(97% 0.005 75 / 0.92);
+  --surface: oklch(100% 0.003 75);
+  --surface-raised: oklch(95% 0.005 75);
+  --border: oklch(88% 0.008 75);
+  --border-glow: oklch(60% 0.1 75);
+  --text-primary: oklch(15% 0.01 320);
+  --text-secondary: oklch(45% 0.008 320);
+  --text-tertiary: oklch(65% 0.006 320);
+  --gold: oklch(45% 0.12 75);
+  --gold-dim: oklch(55% 0.1 75);
+  --gold-soft: oklch(45% 0.12 75 / 0.06);
+  --overlay-bg: oklch(98% 0.003 75 / 0.96);
+  --card-shadow: oklch(0% 0 0 / 0.08);
+  --glow-opacity: 0;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-optical-sizing: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background var(--transition-theme), color var(--transition-theme);
+}
+
+h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
+
+/* ===== AGE GATE ===== */
+.age-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: oklch(3% 0.01 320 / 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.5s var(--ease-out-expo);
+}
+
+.age-gate.hidden { opacity: 0; pointer-events: none; }
+
+.age-gate-box {
+  background: oklch(10% 0.012 320);
+  border: 1px solid oklch(22% 0.015 75);
+  border-radius: 12px;
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+
+.age-gate-box .age-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  border: 2px solid oklch(60% 0.09 75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: oklch(80% 0.12 75);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.age-gate-box h2 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: oklch(93% 0.006 75);
+  margin-bottom: 12px;
+}
+
+.age-gate-box p {
+  font-size: 0.875rem;
+  color: oklch(60% 0.008 320);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.age-gate-box .disclaimer-text {
+  font-size: 0.6875rem;
+  color: oklch(42% 0.008 320);
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.age-btns { display: flex; gap: 12px; justify-content: center; }
+
+.age-btn {
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border: none;
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+.age-btn-yes {
+  background: oklch(80% 0.12 75);
+  color: oklch(10% 0.01 75);
+}
+
+.age-btn-yes:hover {
+  background: oklch(85% 0.13 75);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px oklch(80% 0.12 75 / 0.2);
+}
+
+.age-btn-no {
+  background: transparent;
+  border: 1px solid oklch(30% 0.01 320);
+  color: oklch(60% 0.008 320);
+}
+
+.age-btn-no:hover { border-color: oklch(45% 0.01 320); color: oklch(80% 0.008 320); }
+
+/* ===== AMBIENT BG ===== */
+.bg-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.bg-glow {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--glow-opacity);
+  background: radial-gradient(ellipse at 30% 20%, oklch(30% 0.06 75 / 0.04) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, oklch(20% 0.05 320 / 0.03) 0%, transparent 50%);
+  animation: glowDrift 20s ease-in-out infinite alternate;
+  transition: opacity var(--transition-theme);
+}
+
+@keyframes glowDrift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-3%, 2%) rotate(2deg); }
+}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  transition: all 0.3s var(--ease-out-expo);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.theme-toggle:hover { border-color: var(--gold-dim); color: var(--gold); transform: scale(1.05); }
+.theme-toggle svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun { display: none; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun { display: block; }
+
+/* ===== BANNER ===== */
+.banner {
+  position: relative;
+  width: 100%;
+  height: clamp(240px, 42vw, 500px);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.banner img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.1s linear;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, var(--bg-alpha) 0%, transparent 30%, oklch(5% 0.012 320 / 0.5) 60%, var(--bg) 100%),
+    linear-gradient(135deg, oklch(20% 0.04 75 / 0.08) 0%, transparent 50%);
+  transition: background var(--transition-theme);
+}
+
+[data-theme="light"] .banner-overlay {
+  background:
+    linear-gradient(to bottom, var(--bg-alpha) 0%, transparent 30%, oklch(97% 0.005 75 / 0.6) 60%, var(--bg) 100%),
+    linear-gradient(135deg, oklch(80% 0.04 75 / 0.1) 0%, transparent 50%);
+}
+
+.banner-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px clamp(20px, 4vw, 40px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.banner-text h1 {
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-wrap: balance;
+  line-height: 1.1;
+}
+
+.banner-text h1 span { display: inline-block; color: var(--gold); font-weight: 400; }
+
+.banner-text p {
+  margin-top: 10px;
+  font-size: clamp(0.75rem, 1.8vw, 0.9375rem);
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 45ch;
+  letter-spacing: 0.03em;
+}
+
+.banner-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; flex-wrap: wrap; }
+
+.view-counter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--bg-alpha);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.view-counter svg { width: 14px; height: 14px; stroke: var(--gold-dim); fill: none; stroke-width: 2; }
+.view-counter strong { color: var(--gold); font-weight: 600; }
+
+.kofi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  min-height: 44px;
+  touch-action: manipulation;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.kofi-btn:hover {
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px oklch(80% 0.12 75 / 0.12);
+}
+
+.kofi-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ===== SOCIAL BAR ===== */
+.social-bar {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-alpha);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px clamp(16px, 4vw, 40px);
+  transition: background var(--transition-theme), border-color var(--transition-theme);
+}
+
+.social-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 28px);
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  min-height: 44px;
+  padding: 8px 4px;
+  touch-action: manipulation;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.social-link:hover { color: var(--gold); transform: translateY(-1px); }
+.social-link svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ===== STATS ===== */
+.stats-section {
+  position: relative;
+  z-index: 1;
+  padding: 40px clamp(16px, 4vw, 40px);
+  border-bottom: 1px solid var(--border);
+  transition: border-color var(--transition-theme);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: background var(--transition-theme), border-color var(--transition-theme);
+}
+
+.stat-item {
+  background: var(--surface);
+  padding: clamp(20px, 3vw, 28px) 16px;
+  text-align: center;
+  transition: background var(--transition-theme);
+}
+
+.stat-item:hover { background: var(--surface-raised); }
+
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1.2;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: clamp(0.5625rem, 1.2vw, 0.6875rem);
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ===== X GALLERY ===== */
+.x-feed-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(36px, 5vw, 56px) 0 clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid var(--border);
+  transition: border-color var(--transition-theme);
+}
+
+.x-feed-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 40px) clamp(24px, 3vw, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.x-feed-header h2 {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.x-feed-header h2 svg { width: 20px; height: 20px; fill: var(--text-secondary); }
+
+.x-feed-actions { display: flex; align-items: center; gap: 12px; }
+
+.x-handle {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.x-handle:hover { color: var(--gold); }
+
+.x-scroll-controls { display: flex; gap: 6px; }
+
+.x-scroll-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  transition: all 0.2s;
+}
+
+.x-scroll-btn:hover { border-color: var(--gold-dim); color: var(--gold); background: var(--surface-raised); }
+.x-scroll-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+.x-carousel-track {
+  display: flex;
+  gap: clamp(12px, 2vw, 16px);
+  padding: 0 clamp(16px, 4vw, 40px);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.x-carousel-track::-webkit-scrollbar { display: none; }
+
+.x-post-card {
+  flex: 0 0 auto;
+  width: clamp(180px, 28vw, 280px);
+  scroll-snap-align: start;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: transform 0.4s var(--ease-out-expo), border-color 0.3s, box-shadow 0.4s;
+  position: relative;
+}
+
+.x-post-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--border-glow);
+  box-shadow: 0 20px 50px var(--card-shadow), 0 0 30px oklch(80% 0.12 75 / 0.04);
+}
+
+.x-post-card a { display: block; text-decoration: none; }
+
+.x-post-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.x-post-card:hover img { transform: scale(1.06); }
+
+.x-post-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 48px 12px 12px;
+  background: linear-gradient(to top, oklch(3% 0.01 320 / 0.92) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.x-post-card:hover .x-post-overlay { opacity: 1; }
+.x-post-overlay .post-date { font-size: 0.625rem; color: oklch(75% 0.005 320); }
+.x-post-overlay .post-likes { font-size: 0.625rem; color: var(--gold-dim); display: flex; align-items: center; gap: 4px; }
+.x-post-overlay .post-likes svg { width: 11px; height: 11px; fill: currentColor; }
+
+.x-progress-wrap {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  padding: 0 clamp(16px, 4vw, 40px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.x-progress-bar { flex: 1; height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.x-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); border-radius: 1px; width: 0%; transition: width 0.1s linear; }
+.x-progress-label { font-size: 0.6875rem; color: var(--text-tertiary); letter-spacing: 0.04em; white-space: nowrap; }
+
+/* ===== ADS ===== */
+.ad-slot {
+  border: 1px dashed oklch(25% 0.02 75);
+  border-radius: 4px;
+  background: var(--surface);
+  text-align: center;
+  overflow: hidden;
+  transition: border-color 0.2s, background var(--transition-theme);
+}
+
+.ad-slot:hover { border-color: var(--gold-dim); }
+
+.ad-placeholder {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ad-placeholder .ad-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  opacity: 0.7;
+}
+
+.ad-placeholder .ad-size { font-size: 0.6875rem; color: var(--text-tertiary); opacity: 0.5; }
+
+.ad-leaderboard { max-width: 1200px; margin: 24px auto 0; padding: 0 clamp(16px, 4vw, 40px); }
+.ad-leaderboard .ad-slot { width: 100%; min-height: 90px; }
+.ad-mid { margin: 32px 0; }
+.ad-mid .ad-slot { width: 100%; min-height: 90px; }
+.ad-footer-wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+.ad-footer-wrap .ad-slot { width: 100%; min-height: 90px; }
+
+/* ===== TABS ===== */
+.tabs-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-alpha);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition-theme), border-color var(--transition-theme);
+}
+
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 clamp(16px, 4vw, 40px);
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  padding: 18px 18px;
+  min-height: 52px;
+  touch-action: manipulation;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.tab:hover { color: var(--text-secondary); }
+.tab.active { color: var(--gold); }
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 14px;
+  right: 14px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* ===== MAIN ===== */
+.main {
+  position: relative;
+  z-index: 1;
+  padding: clamp(28px, 4vw, 40px) clamp(16px, 4vw, 40px) clamp(40px, 5vw, 56px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: panelIn 0.5s var(--ease-out-expo); }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 24px;
+}
+
+/* ===== VIDEO GRID ===== */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.video-card {
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.4s var(--ease-out-expo), border-color 0.4s, box-shadow 0.4s, background var(--transition-theme);
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: 0 24px 60px var(--card-shadow), 0 0 20px oklch(80% 0.12 75 / 0.03);
+}
+
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%;
+  background: oklch(4% 0.008 320);
+}
+
+[data-theme="light"] .video-embed { background: oklch(92% 0.005 320); }
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-meta { padding: 14px 16px 16px; }
+
+.video-meta h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.video-meta p { font-size: 0.8125rem; color: var(--text-tertiary); font-weight: 300; letter-spacing: 0.01em; }
+
+.video-card.ad-inline {
+  border: 1px dashed oklch(25% 0.02 75);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.lightbox.active { opacity: 1; pointer-events: all; }
+
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 6px;
+  transform: scale(0.92);
+  transition: transform 0.4s var(--ease-out-expo);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.lightbox.active .lightbox-img { transform: scale(1); }
+
+.lb-btn {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.lb-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.lb-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+.lb-close { top: env(safe-area-inset-top, 16px); right: 16px; margin-top: 16px; }
+.lb-prev { top: 50%; left: 12px; transform: translateY(-50%); }
+.lb-next { top: 50%; right: 12px; transform: translateY(-50%); }
+.lb-counter { position: absolute; bottom: calc(env(safe-area-inset-bottom, 16px) + 20px); left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: var(--text-tertiary); letter-spacing: 0.08em; }
+
+/* ===== FOOTER ===== */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px clamp(16px, 4vw, 40px) calc(env(safe-area-inset-bottom, 16px) + 40px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  transition: border-color var(--transition-theme);
+}
+
+.footer-copy { font-size: 0.75rem; color: var(--text-tertiary); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  touch-action: manipulation;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold-dim); }
+
+/* ===== BACK TO TOP ===== */
+.back-to-top {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 12px) + 16px);
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s var(--ease-out-expo);
+  backdrop-filter: blur(8px);
+}
+
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover { border-color: var(--gold-dim); color: var(--gold); }
+.back-to-top svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== MOBILE BREAKPOINTS ===== */
+@media (max-width: 768px) {
+  .banner { height: clamp(200px, 50vw, 280px); }
+
+  .banner-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+
+  .x-feed-header { flex-direction: column; align-items: flex-start; }
+
+  .video-grid { grid-template-columns: 1fr; }
+
+  .site-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Mobile: show overlay always on touch devices */
+  .x-post-overlay { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  .banner { height: 200px; }
+  .banner-text h1 { font-size: 1.75rem; }
+
+  .age-gate-box { padding: 32px 20px; }
+  .age-gate-box h2 { font-size: 1.4rem; }
+  .age-gate-box p { font-size: 0.8125rem; }
+  .age-btns { flex-direction: column; width: 100%; }
+  .age-btn { width: 100%; text-align: center; }
+
+  .social-link span { display: none; }
+
+  .x-handle { display: none; }
+}
+
+@media (min-width: 1024px) {
+  .video-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .bg-glow { animation: none; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
 </head>
 <body>
 
-    <!-- BANNER -->
-    <div class="banner">
-        <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Banner">
-        <div class="banner-overlay"></div>
-        <div class="banner-content">
-            <div class="banner-text">
-                <h1>Asian TitsTok</h1>
-                <p>2026: To cleanse and release completely</p>
-            </div>
-            <div class="banner-actions">
-                <!-- VIEW COUNTER: Replace YOUR_DOMAIN with your actual domain -->
-                <div class="view-counter">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                    <span><strong id="visit-count">0</strong> views</span>
-                </div>
-                <!-- KO-FI: Replace YOUR_USERNAME -->
-                <a href="https://ko-fi.com/asiantitstok" target="_blank" rel="noopener" class="kofi-btn">
-                    <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
-                    Support
-                </a>
-            </div>
-        </div>
+<!-- AGE DISCLAIMER -->
+<div class="age-gate" id="ageGate">
+  <div class="age-gate-box">
+    <div class="age-icon">18+</div>
+    <h2>Age Verification</h2>
+    <p>This website contains content intended for adults only. By entering, you confirm that you are at least 18 years of age or the age of majority in your jurisdiction.</p>
+    <div class="age-btns">
+      <button class="age-btn age-btn-yes" id="ageYes">I am 18+</button>
+      <button class="age-btn age-btn-no" id="ageNo">Leave</button>
     </div>
+    <p class="disclaimer-text">By clicking "I am 18+", you acknowledge and agree that you are of legal age to view adult content in your country or region. This site does not host any explicit content and is for entertainment purposes only.</p>
+  </div>
+</div>
 
-    <!-- SOCIAL LINKS BAR: Replace # with your actual profile URLs -->
-    <div class="social-bar">
-        <div class="social-bar-inner">
-            <a href="https://www.youtube.com/@theSGKnight" class="social-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                YouTube
-            </a>
-            <a href="https://www.instagram.com/thesgknight" class="social-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-                Instagram
-            </a>
-            <a href="https://www.tiktok.com/@thesgknight_" class="social-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-                TikTok
-            </a>
-            <a href="https://x.com/asiantitstok" class="social-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                X
-            </a>
-        </div>
+<!-- Ambient -->
+<div class="bg-grain"></div>
+<div class="bg-glow"></div>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<!-- BANNER -->
+<header class="banner">
+  <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Banner" id="bannerImg">
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <div class="banner-text">
+      <h1>Asian <span>TitsTok</span></h1>
+      <p>2026: To cleanse and release completely</p>
     </div>
-
-    <!-- TABS -->
-    <div class="tabs-wrapper">
-        <div class="tabs">
-             <button class="tab active" data-tab="highlights">Highlights</button>
-            <button class="tab" data-tab="tutorials">khaw18</button>
-            <button class="tab" data-tab="vlogs">sozzlepopp</button>
-            <button class="tab" data-tab="reviews">viptoriaa</button>
-            <button class="tab" data-tab="other">SG babes</button>
-        </div>
+    <div class="banner-actions">
+      <div class="view-counter">
+        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span><strong id="visit-count">0</strong> views</span>
+      </div>
+      <a href="https://ko-fi.com/asiantitstok" target="_blank" rel="noopener" class="kofi-btn">
+        <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
+        Support
+      </a>
     </div>
+  </div>
+</header>
 
-    <!-- AD SLOT 1: LEADERBOARD -->
-    <div class="ad-leaderboard">
-        <div class="ad-slot">
-            <div class="ad-slot-placeholder">
-                <span class="ad-label">Partner</span>
-                <span class="ad-size">728 × 90</span>
-            </div>
-        </div>
+<!-- SOCIAL BAR -->
+<nav class="social-bar">
+  <div class="social-bar-inner">
+    <a href="https://www.youtube.com/@theSGKnight" class="social-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      <span>YouTube</span>
+    </a>
+    <a href="https://www.instagram.com/thesgknight" class="social-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      <span>Instagram</span>
+    </a>
+    <a href="https://www.tiktok.com/@thesgknight_" class="social-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      <span>TikTok</span>
+    </a>
+    <a href="https://x.com/asiantitstok" class="social-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      <span>X</span>
+    </a>
+  </div>
+</nav>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number" data-target="888" data-suffix="+">0</div>
+      <div class="stat-label">Total Views</div>
     </div>
-
-    <main class="main">
-
-        <!-- HIGHLIGHTS TAB -->
-        <div class="tab-panel active" id="highlights">
-            <p class="section-heading">Featured</p>
-            <div class="video-grid">
-
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="560" height="315" src="https://www.youtube.com/embed/6ig-hRjsJbU?si=aGNTXy760TsMjcgc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>sozzlepopp - by the poolside</h3>
-                        <p>sophienicole sozpop natural blonde beauty</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="560" height="315" src="https://www.youtube.com/embed/Q64LfVvCbr8?si=bFU-Jl4OI7o4GhJx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>khaw18 - thai gamer girl</h3>
-                        <p>woranachi khaw003 khunkhaw00 khxxna mxalil4 natural thai beauty</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="893" src="https://www.youtube.com/embed/oBwTzhP6cxQ" title="Asian Candy Live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>viptoriaa - Livestreaming</h3>
-                        <p>asiancandy natural asian beauty</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- AD SLOT 2: MID-CONTENT -->
-            <div class="ad-mid-content">
-                <div class="ad-slot">
-                    <div class="ad-slot-placeholder">
-                        <span class="ad-label">Partner</span>
-                        <span class="ad-size">970 × 100</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-grid">
-
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="844" src="https://www.youtube.com/embed/_nfOqynV5tM" title="Beautiful TikTok Livestreamer - Victoria viptoria #abg #asian - 36🐥🐥" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>viptoriaa - Outdoor Livestreaming</h3>
-                        <p>asiancandy natural asian beauty</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="893" src="https://www.youtube.com/embed/29VV8pUVk8o" title="Beautiful TikTok Shop Livestreamer #singapore #shopping #sg 😻20" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>SG babe Valerie - TikTok Shop Livestream</h3>
-                        <p>natural Singapore beauty</p>
-                    </div>
-                </div>
-
-                <!-- AD SLOT 3: IN-GRID -->
-                <div class="video-card ad-slot ad-inline" style="border: 1px dashed var(--sponsor-border); background: var(--sponsor-bg);">
-                    <div class="ad-slot-placeholder" style="height: 100%; min-height: 250px;">
-                        <span class="ad-label">Sponsored</span>
-                        <span class="ad-size">300 × 250</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- AFFILIATE PICKS: Replace # with affiliate links and add product images -->
-            <div class="affiliate-section">
-                <p class="section-heading">Recommended</p>
-                <div class="affiliate-grid">
-
-                    <a href="#" class="affiliate-item" target="_blank" rel="noopener sponsored">
-                        <div class="affiliate-img">
-                            <span class="placeholder-icon">IMG</span>
-                        </div>
-                        <h4>Product Name</h4>
-                        <span class="affiliate-price">$299</span>
-                        <span class="affiliate-tag">Affiliate</span>
-                    </a>
-
-                    <a href="#" class="affiliate-item" target="_blank" rel="noopener sponsored">
-                        <div class="affiliate-img">
-                            <span class="placeholder-icon">IMG</span>
-                        </div>
-                        <h4>Product Name</h4>
-                        <span class="affiliate-price">$199</span>
-                        <span class="affiliate-tag">Affiliate</span>
-                    </a>
-
-                    <a href="#" class="affiliate-item" target="_blank" rel="noopener sponsored">
-                        <div class="affiliate-img">
-                            <span class="placeholder-icon">IMG</span>
-                        </div>
-                        <h4>Product Name</h4>
-                        <span class="affiliate-price">$450</span>
-                        <span class="affiliate-tag">Affiliate</span>
-                    </a>
-
-                    <a href="#" class="affiliate-item" target="_blank" rel="noopener sponsored">
-                        <div class="affiliate-img">
-                            <span class="placeholder-icon">IMG</span>
-                        </div>
-                        <h4>Product Name</h4>
-                        <span class="affiliate-price">$89</span>
-                        <span class="affiliate-tag">Affiliate</span>
-                    </a>
-
-                    <a href="#" class="affiliate-item" target="_blank" rel="noopener sponsored">
-                        <div class="affiliate-img">
-                            <span class="placeholder-icon">IMG</span>
-                        </div>
-                        <h4>Product Name</h4>
-                        <span class="affiliate-price">$599</span>
-                        <span class="affiliate-tag">Affiliate</span>
-                    </a>
-
-                </div>
-            </div>
-
-        </div>
-
-       <!-- TUTORIALS TAB -->
-        <div class="tab-panel" id="tutorials">
-            <p class="section-heading">khaw18</p>
-            <div class="video-grid">
-
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="893" src="https://www.youtube.com/embed/Un4EvCVE10E" title="Beautiful Tiktok Livestreamer - woranachi khaw18 khaw003 khunkhaw00 khxxna 😻- 26" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>khaw - thai gamer girl 2</h3>
-                        <p>natural thai beauty</p>
-                    </div>
-                </div>
-
-        <!-- VLOGS TAB -->
-        <div class="tab-panel" id="vlogs">
-            <p class="section-heading">sozzlepopp</p>
-            <div class="video-grid">
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="844" src="https://www.youtube.com/embed/t63JGTf6r-s" title="Beautiful Twitch Livestreamer - sozzlepopp sozpop #2026 #blonde #twitch - 2🐥🐥" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-<h3>sozzlepopp - Livestreaming</h3>
-                        <p>natural blonde beauty</p>
-                    </div>
-                </div>
-            </div>
-        </div>
- <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="844" src="https://www.youtube.com/embed/SBKXyLw17xw" title="Beautiful Tiktok Livestreamer - woranachi khaw18 khaw003 khunkhaw00 khxxna 😻- 15" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>khaw - thai gamer girl 3</h3>
-                        <p>natural thai beauty</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- REVIEWS TAB -->
-        <div class="tab-panel" id="reviews">
-            <p class="section-heading">viptoriaa</p>
-            <div class="video-grid">
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="844" src="https://www.youtube.com/embed/KbhquTfYf7U" title="Beautiful TikTok Livestreamer - Victoria viptoria #abg #asian - 32🐥🐥" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>viptoriaa - by the poolside</h3>
-                        <p>natural asian beauty</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- OTHER TAB -->
-        <div class="tab-panel" id="other">
-            <p class="section-heading">SG babes</p>
-            <div class="video-grid">
-                <div class="video-card">
-                    <div class="video-embed">
-                        <div class="placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span><iframe width="1500" height="893" src="https://www.youtube.com/embed/APfWc9zf8PA" title="Beautiful Tiktok Livestreamer #graciehartie #sg - 😻😻2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
-                        </div>
-                    </div>
-                    <div class="video-meta">
-                        <h3>graciehartie - Livestreaming</h3>
-                        <p>natural Singapore beauty</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- AD SLOT 4: FOOTER -->
-    <div class="ad-footer">
-        <div class="ad-slot">
-            <div class="ad-slot-placeholder">
-                <span class="ad-label">Partner</span>
-                <span class="ad-size">728 × 90</span>
-            </div>
-        </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="52" data-suffix="">0</div>
+      <div class="stat-label">Videos</div>
     </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="12" data-suffix="">0</div>
+      <div class="stat-label">X Posts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="5" data-suffix="">0</div>
+      <div class="stat-label">Models</div>
+    </div>
+  </div>
+</section>
 
-     <!-- COMMENTS: Replace with Disqus embed -->
-    <section class="comments-section">
-        <h2>Discussion</h2>
-        <div class="comments-placeholder">
-            To enable comments, sign up at <strong>disqus.com</strong> and replace this block with:
-            <code><div id="disqus_thread"></div>
+<!-- X GALLERY -->
+<section class="x-feed-section">
+  <div class="x-feed-header">
+    <h2>
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Latest Posts
+    </h2>
+    <div class="x-feed-actions">
+      <a href="https://x.com/asiantitstok" target="_blank" rel="noopener" class="x-handle">@asiantitstok</a>
+      <div class="x-scroll-controls">
+        <button class="x-scroll-btn" id="scrollLeft" aria-label="Scroll left"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="x-scroll-btn" id="scrollRight" aria-label="Scroll right"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="x-carousel-track" id="xCarousel">
+    <div class="x-post-card" data-index="0"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 1" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 5, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 142</span></div></div>
+    <div class="x-post-card" data-index="1"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 2" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 4, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 89</span></div></div>
+    <div class="x-post-card" data-index="2"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 3" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 3, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 203</span></div></div>
+    <div class="x-post-card" data-index="3"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 4" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 2, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 67</span></div></div>
+    <div class="x-post-card" data-index="4"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 5" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 1, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 156</span></div></div>
+    <div class="x-post-card" data-index="5"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 6" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 30, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 91</span></div></div>
+    <div class="x-post-card" data-index="6"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 7" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 29, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 178</span></div></div>
+    <div class="x-post-card" data-index="7"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 8" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 28, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 54</span></div></div>
+    <div class="x-post-card" data-index="8"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 9" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 27, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 112</span></div></div>
+    <div class="x-post-card" data-index="9"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 10" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 26, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 245</span></div></div>
+    <div class="x-post-card" data-index="10"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 11" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 25, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 301</span></div></div>
+    <div class="x-post-card" data-index="11"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 12" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 24, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 188</span></div></div>
+  </div>
+
+  <div class="x-progress-wrap">
+    <div class="x-progress-bar"><div class="x-progress-fill" id="scrollProgress"></div></div>
+    <span class="x-progress-label" id="scrollStatus">Auto-scrolling</span>
+  </div>
+</section>
+
+<!-- TABS -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab active" data-tab="highlights">Highlights</button>
+    <button class="tab" data-tab="khaw18">khaw18</button>
+    <button class="tab" data-tab="sozzlepopp">sozzlepopp</button>
+    <button class="tab" data-tab="viptoriaa">viptoriaa</button>
+    <button class="tab" data-tab="sgbabes">SG babes</button>
+  </div>
+</div>
+
+<!-- AD -->
+<div class="ad-leaderboard"><div class="ad-slot"><div class="ad-placeholder"><span class="ad-label">Partner</span><span class="ad-size">728 &times; 90</span></div></div></div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HIGHLIGHTS -->
+  <div class="tab-panel active" id="highlights">
+    <p class="section-heading">Featured</p>
+    <div class="video-grid">
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/6ig-hRjsJbU?si=aGNTXy760TsMjcgc" title="sozzlepopp poolside" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>sozzlepopp - by the poolside</h3><p>sophienicole sozpop natural blonde beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Q64LfVvCbr8?si=bFU-Jl4OI7o4GhJx" title="khaw18" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw18 - thai gamer girl</h3><p>woranachi khaw003 khunkhaw00 natural thai beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/oBwTzhP6cxQ" title="viptoriaa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Livestreaming</h3><p>asiancandy natural asian beauty</p></div></div>
+    </div>
+    <div class="ad-mid"><div class="ad-slot"><div class="ad-placeholder"><span class="ad-label">Partner</span><span class="ad-size">970 &times; 100</span></div></div></div>
+    <div class="video-grid">
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/_nfOqynV5tM" title="viptoriaa outdoor" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Outdoor Livestreaming</h3><p>asiancandy natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/29VV8pUVk8o" title="Valerie" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>SG babe Valerie - TikTok Shop</h3><p>natural Singapore beauty</p></div></div>
+      <div class="video-card ad-inline reveal"><div class="ad-placeholder" style="min-height:250px;"><span class="ad-label">Sponsored</span><span class="ad-size">300 &times; 250</span></div></div>
+    </div>
+  </div>
+
+  <!-- KHAW18 -->
+  <div class="tab-panel" id="khaw18">
+    <p class="section-heading">khaw18</p>
+    <div class="video-grid">
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Un4EvCVE10E" title="khaw 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 2</h3><p>natural thai beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/SBKXyLw17xw" title="khaw 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 3</h3><p>natural thai beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Q64LfVvCbr8" title="khaw 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 4</h3><p>REPLACE with your embed URL</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+    </div>
+  </div>
+
+  <!-- SOZZLEPOPP -->
+  <div class="tab-panel" id="sozzlepopp">
+    <p class="section-heading">sozzlepopp</p>
+    <div class="video-grid">
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/t63JGTf6r-s" title="sozzlepopp live" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>sozzlepopp - Livestreaming</h3><p>natural blonde beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/6ig-hRjsJbU" title="sozzlepopp pool" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>sozzlepopp - poolside chill</h3><p>natural blonde beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+    </div>
+  </div>
+
+  <!-- VIPTORIAA -->
+  <div class="tab-panel" id="viptoriaa">
+    <p class="section-heading">viptoriaa</p>
+    <div class="video-grid">
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/KbhquTfYf7U" title="viptoriaa pool" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - by the poolside</h3><p>natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/oBwTzhP6cxQ" title="viptoriaa live" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Live session</h3><p>asiancandy natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/_nfOqynV5tM" title="viptoriaa outdoor" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Outdoor</h3><p>natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+    </div>
+  </div>
+
+  <!-- SG BABES -->
+  <div class="tab-panel" id="sgbabes">
+    <p class="section-heading">SG babes</p>
+    <div class="video-grid">
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/APfWc9zf8PA" title="graciehartie" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>graciehartie - Livestreaming</h3><p>natural Singapore beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/29VV8pUVk8o" title="Valerie" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>SG babe Valerie - TikTok Shop</h3><p>natural Singapore beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+    </div>
+  </div>
+
+</main>
+
+<!-- AD FOOTER -->
+<div class="ad-footer-wrap"><div class="ad-slot"><div class="ad-placeholder"><span class="ad-label">Partner</span><span class="ad-size">728 &times; 90</span></div></div></div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span class="footer-copy">&copy; 2026 Asian TitsTok. Adults 18+ only.</span>
+  <nav class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="https://x.com/asiantitstok" target="_blank">Contact</a>
+  </nav>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <img class="lightbox-img" id="lbImg" src="" alt="Full size">
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
 <script>
-var disqus_config = function () {
-    this.page.url = window.location.href;
-    this.page.identifier = window.location.pathname;
-};
 (function() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://asiantitstok.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script></code>
+  'use strict';
 
-        </div>
-    </section>
+  // === AGE GATE ===
+  var ageGate = document.getElementById('ageGate');
+  if (localStorage.getItem('ageVerified') === 'true') {
+    ageGate.classList.add('hidden');
+    setTimeout(function() { ageGate.remove(); }, 600);
+  }
+  document.getElementById('ageYes').addEventListener('click', function() {
+    localStorage.setItem('ageVerified', 'true');
+    ageGate.classList.add('hidden');
+    setTimeout(function() { ageGate.remove(); }, 600);
+  });
+  document.getElementById('ageNo').addEventListener('click', function() {
+    window.location.href = 'https://www.google.com';
+  });
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <span class="footer-copy">&copy; 2026 Asian TitsTok</span>
-        <nav class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Contact</a>
-        </nav>
-    </footer>
+  // === THEME TOGGLE ===
+  var savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    var current = document.documentElement.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
 
-    <script>
-        // Tab switching
-        const tabs = document.querySelectorAll('.tab');
-        const panels = document.querySelectorAll('.tab-panel');
+  // === VIEW COUNTER ===
+  fetch('https://hits.sh/asiantitstok.com/hit.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var total = data.total || 888;
+      document.getElementById('visit-count').textContent = total.toLocaleString();
+      // Sync to stats
+      var viewStat = document.querySelector('.stat-number[data-target]');
+      if (viewStat) viewStat.setAttribute('data-target', total);
+    })
+    .catch(function() {
+      document.getElementById('visit-count').textContent = '888+';
+    });
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById(tab.dataset.tab).classList.add('active');
-            });
+  // === STATS COUNTERS ===
+  function animateCounters() {
+    document.querySelectorAll('.stat-number[data-target]').forEach(function(el) {
+      var target = parseInt(el.getAttribute('data-target'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var start = performance.now();
+      var duration = 2000;
+      function update(now) {
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 4);
+        el.textContent = Math.round(eased * target).toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+
+  var statsObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { animateCounters(); statsObs.unobserve(entry.target); }
+    });
+  }, { threshold: 0.3 });
+  var statsEl = document.querySelector('.stats-section');
+  if (statsEl) statsObs.observe(statsEl);
+
+  // === BANNER PARALLAX (desktop only) ===
+  var bannerImg = document.getElementById('bannerImg');
+  if (window.matchMedia('(hover: hover)').matches) {
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          var scroll = window.scrollY;
+          if (scroll < 600) bannerImg.style.transform = 'translateY(' + (scroll * 0.3) + 'px)';
+          ticking = false;
         });
+        ticking = true;
+      }
+    });
+  }
 
-        // View counter using hits.sh (free)
-      // Replace YOUR_DOMAIN with your actual domain
-        fetch('https://hits.sh/asiantitstok.com/hit.json')
-            .then(r => r.json())
-            .then(data => {
-                document.getElementById('visit-count').textContent = data.total || '0';
-            })
-            .catch(() => {
-                document.getElementById('visit-count').textContent = '—';
-            });
-    </script>
-<a href="https://hits.sh/asiantitstok.com/"><img alt="Hits" src="https://hits.sh/asiantitstok.com.svg?label=Tits&extraCount=888&color=ec917f&labelColor=000000"/></a>
+  // === TABS ===
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.tab-panel');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+      observeReveals();
+    });
+  });
+
+  // === X CAROUSEL ===
+  var carousel = document.getElementById('xCarousel');
+  var progressFill = document.getElementById('scrollProgress');
+  var statusEl = document.getElementById('scrollStatus');
+  var cards = document.querySelectorAll('.x-post-card');
+  var isPaused = false;
+
+  function updateProgress() {
+    var max = carousel.scrollWidth - carousel.clientWidth;
+    progressFill.style.width = (max > 0 ? (carousel.scrollLeft / max) * 100 : 0) + '%';
+  }
+  carousel.addEventListener('scroll', updateProgress);
+
+  function autoScroll() {
+    if (!isPaused) {
+      carousel.scrollLeft += 0.7;
+      if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 2) carousel.scrollLeft = 0;
+    }
+    requestAnimationFrame(autoScroll);
+  }
+
+  function pause() { isPaused = true; statusEl.textContent = 'Paused'; }
+  function resume() { isPaused = false; statusEl.textContent = 'Auto-scrolling'; }
+
+  carousel.addEventListener('mouseenter', pause);
+  carousel.addEventListener('mouseleave', resume);
+  carousel.addEventListener('touchstart', pause, { passive: true });
+  carousel.addEventListener('touchend', function() { setTimeout(resume, 3000); });
+
+  document.getElementById('scrollLeft').addEventListener('click', function() { carousel.scrollBy({ left: -260, behavior: 'smooth' }); pause(); setTimeout(resume, 4000); });
+  document.getElementById('scrollRight').addEventListener('click', function() { carousel.scrollBy({ left: 260, behavior: 'smooth' }); pause(); setTimeout(resume, 4000); });
+
+  requestAnimationFrame(autoScroll);
+  updateProgress();
+
+  // === LIGHTBOX ===
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCounter = document.getElementById('lbCounter');
+  var images = Array.from(cards).map(function(c) { return c.querySelector('img').src; });
+  var lbIndex = 0;
+
+  function openLB(i) { lbIndex = i; lbImg.src = images[lbIndex]; lbCounter.textContent = (lbIndex+1)+' / '+images.length; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeLB() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+  function prevLB() { lbIndex = (lbIndex-1+images.length)%images.length; lbImg.src = images[lbIndex]; lbCounter.textContent = (lbIndex+1)+' / '+images.length; }
+  function nextLB() { lbIndex = (lbIndex+1)%images.length; lbImg.src = images[lbIndex]; lbCounter.textContent = (lbIndex+1)+' / '+images.length; }
+
+  cards.forEach(function(card, i) { card.addEventListener('click', function(e) { if (e.target.closest('a')) return; openLB(i); }); });
+  document.getElementById('lbClose').addEventListener('click', closeLB);
+  document.getElementById('lbPrev').addEventListener('click', prevLB);
+  document.getElementById('lbNext').addEventListener('click', nextLB);
+  lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLB(); });
+  document.addEventListener('keydown', function(e) { if (!lightbox.classList.contains('active')) return; if (e.key==='Escape') closeLB(); if (e.key==='ArrowLeft') prevLB(); if (e.key==='ArrowRight') nextLB(); });
+
+  // Swipe support for lightbox on mobile
+  var touchStartX = 0;
+  lbImg.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lbImg.addEventListener('touchend', function(e) {
+    var diff = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(diff) > 50) { diff > 0 ? prevLB() : nextLB(); }
+  });
+
+  // === BACK TO TOP ===
+  var btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() { btt.classList.toggle('visible', window.scrollY > 400); });
+  btt.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  // === SCROLL REVEAL ===
+  function observeReveals() {
+    var reveals = document.querySelectorAll('.reveal:not(.visible)');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry, i) {
+        if (entry.isIntersecting) {
+          setTimeout(function() { entry.target.classList.add('visible'); }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
+    reveals.forEach(function(el) { observer.observe(el); });
+  }
+  observeReveals();
+})();
+</script>
+<!-- Hidden hit counter (feeds the view count above) -->
+<a href="https://hits.sh/asiantitstok.com/" style="position:fixed;bottom:0;left:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;" aria-hidden="true"><img alt="" src="https://hits.sh/asiantitstok.com.svg?label=Tits&extraCount=888&color=ec917f&labelColor=000000"></a>
 </body>
 </html>
