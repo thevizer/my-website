@@ -1,0 +1,16 @@
+{
+  "handle": "asiantitstok",
+  "updated": "2026-07-06T00:00:00Z",
+  "count": 8,
+  "_note": "SAMPLE feed so the site works out of the box. Replace this file automatically by running x-fetch.js on a schedule, or point xFeedUrl at your Cloudflare Worker (x-worker.js). Schema per post: id, url, text, media, poster, type (photo|video|animated_gif), date (ISO), likes.",
+  "posts": [
+    { "id": "1", "url": "https://x.com/asiantitstok", "text": "Poolside golden hour ☀️", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "photo", "date": "2026-07-05", "likes": 142 },
+    { "id": "2", "url": "https://x.com/asiantitstok", "text": "New clip is live", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "video", "date": "2026-07-04", "likes": 89 },
+    { "id": "3", "url": "https://x.com/asiantitstok", "text": "Weekend vibes", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "photo", "date": "2026-07-03", "likes": 203 },
+    { "id": "4", "url": "https://x.com/asiantitstok", "text": "Behind the scenes", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "photo", "date": "2026-07-02", "likes": 67 },
+    { "id": "5", "url": "https://x.com/asiantitstok", "text": "Livestream tonight 9pm", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "video", "date": "2026-07-01", "likes": 156 },
+    { "id": "6", "url": "https://x.com/asiantitstok", "text": "Studio day", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "photo", "date": "2026-06-30", "likes": 91 },
+    { "id": "7", "url": "https://x.com/asiantitstok", "text": "Throwback 🖤", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "photo", "date": "2026-06-29", "likes": 178 },
+    { "id": "8", "url": "https://x.com/asiantitstok", "text": "Sunset series", "media": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "poster": "https://i.postimg.cc/4d0MrQ1X/11.jpg", "type": "photo", "date": "2026-06-28", "likes": 245 }
+  ]
+}

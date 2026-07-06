@@ -92,10 +92,31 @@ gtag('config', 'G-75M3EK7TCN');
 <meta name="google-adsense-account" content="ca-pub-8574183558034654">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8574183558034654" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b0f" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)">
 <title>Asian TitsTok</title>
+<meta name="description" content="Asian TitsTok — a curated 18+ gallery of livestream and social clips. Latest posts auto-updated from X (@asiantitstok).">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="rating" content="adult">
+<link rel="canonical" href="https://asiantitstok.com/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Asian TitsTok">
+<meta property="og:title" content="Asian TitsTok">
+<meta property="og:description" content="A curated 18+ gallery — latest posts auto-updated from X.">
+<meta property="og:url" content="https://asiantitstok.com/">
+<meta property="og:image" content="https://i.postimg.cc/4d0MrQ1X/11.jpg">
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@asiantitstok">
+<meta name="twitter:title" content="Asian TitsTok">
+<meta name="twitter:description" content="A curated 18+ gallery — latest posts auto-updated from X.">
+<meta name="twitter:image" content="https://i.postimg.cc/4d0MrQ1X/11.jpg">
+<!-- Favicon (inline, no extra request) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230d0b0f' stroke='%23c9a96e' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c9a96e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -1019,9 +1040,120 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
   .bg-glow { animation: none; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ===== ENHANCEMENTS ===== */
+/* ===== ACCESSIBILITY: skip link + visible focus ===== */
+.skip-link {
+  position: fixed; top: -60px; left: 12px; z-index: 100000;
+  background: var(--gold); color: #111; padding: 10px 16px;
+  border-radius: 6px; font-size: 0.8125rem; font-weight: 600;
+  text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+
+/* ===== LIVE DOT (view counter + X feed) ===== */
+.live-dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: #28c76f; flex: 0 0 auto;
+  box-shadow: 0 0 0 0 rgba(40,199,111,0.6);
+  animation: livePulse 2s infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(40,199,111,0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(40,199,111,0); }
+  100% { box-shadow: 0 0 0 0 rgba(40,199,111,0); }
+}
+.live-dot.ping { animation: livePing 0.6s ease-out; }
+@keyframes livePing { 0% { transform: scale(1); } 50% { transform: scale(1.9); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
+/* ===== X "LIVE" PILL (feed header) ===== */
+.x-live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.625rem; letter-spacing: 0.12em; font-weight: 600;
+  text-transform: uppercase; color: var(--gold);
+  border: 1px solid var(--gold-dim); border-radius: 999px;
+  padding: 4px 10px; white-space: nowrap;
+}
+
+/* ===== X CARD: video play badge ===== */
+.x-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.6);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; pointer-events: none;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.x-play svg { width: 20px; height: 20px; margin-left: 2px; }
+
+/* ===== X FEED: loading hint when the track is empty ===== */
+.x-carousel-track:empty {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px;
+}
+.x-carousel-track:empty::after {
+  content: 'Loading posts\2026'; color: var(--text-tertiary); font-size: 0.8125rem;
+}
+
+/* ===== LIGHTBOX: "View on X" link ===== */
+.lb-viewx {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom, 16px) + 52px);
+  left: 50%; transform: translateX(-50%);
+  font-size: 0.75rem; letter-spacing: 0.04em; color: var(--gold);
+  text-decoration: none; border: 1px solid var(--gold-dim);
+  border-radius: 6px; padding: 8px 16px; background: var(--surface);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s, border-color 0.2s;
+}
+.lb-viewx:hover { background: var(--gold-soft); border-color: var(--gold); }
+
+/* ===== FILLABLE VIDEO SLOTS ===== */
+.video-slot .video-embed.empty { border: 1px dashed var(--border-glow); background: var(--surface); }
+[data-theme="light"] .video-slot .video-embed.empty { background: var(--surface-raised); }
+.video-slot .slot-hint {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; color: var(--gold-dim);
+  font-size: 1.05rem; letter-spacing: 0.08em; opacity: 0.7;
+}
+.video-slot:hover .slot-hint { opacity: 1; color: var(--gold); }
+
+/* ===== FOOTER: copyright / disclaimer / DMCA ===== */
+.site-footer { align-items: flex-start; }
+.footer-main { display: flex; flex-direction: column; gap: 10px; max-width: 72ch; }
+.footer-disclaimer { font-size: 0.6875rem; line-height: 1.65; color: var(--text-tertiary); }
+.footer-legal { font-size: 0.6875rem; color: var(--text-tertiary); }
+.footer-legal summary { cursor: pointer; color: var(--gold-dim); letter-spacing: 0.04em; list-style: none; }
+.footer-legal summary::-webkit-details-marker { display: none; }
+.footer-legal summary::before { content: '\25B8  '; }
+.footer-legal[open] summary::before { content: '\25BE  '; }
+.footer-legal summary:hover { color: var(--gold); }
+.footer-legal p { margin-top: 8px; line-height: 1.65; }
+.footer-legal a { color: var(--gold-dim); }
+.footer-legal a:hover { color: var(--gold); }
 </style>
 </head>
 <body>
+<!-- Skip link (keyboard / screen-reader accessibility) -->
+<a class="skip-link" href="#highlights">Skip to content</a>
+
+<!-- =======================================================================
+     SITE CONFIG  —  edit these values; no code-diving required.
+     ======================================================================= -->
+<script>
+  window.SITE_CONFIG = {
+    xHandle: 'asiantitstok',              // your X username (without the @)
+    xFeedUrl: 'posts.json',               // static feed file, OR your Worker URL
+                                          //   e.g. 'https://xfeed.YOURNAME.workers.dev'
+    xFeedRefreshMs: 5 * 60 * 1000,        // re-pull the feed every 5 min (0 = load once)
+    counterNamespace: 'asiantitstok.com', // view-counter bucket — keep this stable to keep the number
+    counterKey: 'views',
+    counterPollMs: 20 * 1000,             // refresh the live view number every 20s (0 = off)
+    hideEmptyVideos: false                 // remove unfinished "about:blank" video slots
+  };
+</script>
 
 <!-- AGE DISCLAIMER -->
 <div class="age-gate" id="ageGate">
@@ -1049,7 +1181,7 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
 
 <!-- BANNER -->
 <header class="banner">
-  <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Banner" id="bannerImg">
+  <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Asian TitsTok banner" id="bannerImg" width="1600" height="500" fetchpriority="high" decoding="async">
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <div class="banner-text">
@@ -1059,9 +1191,9 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
     <div class="banner-actions">
       <div class="view-counter">
         <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        <span><strong id="visit-count">0</strong> views</span>
+        <span class="live-dot" id="liveDot" aria-hidden="true"></span><span><strong id="visit-count">0</strong> views</span>
       </div>
-      <a href="https://ko-fi.com/asiantitstok" target="_blank" rel="noopener" class="kofi-btn">
+      <a href="https://ko-fi.com/asiantitstok" target="_blank" rel="noopener noreferrer" class="kofi-btn">
         <svg viewBox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311z"/></svg>
         Support
       </a>
@@ -1072,19 +1204,19 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
 <!-- SOCIAL BAR -->
 <nav class="social-bar">
   <div class="social-bar-inner">
-    <a href="https://www.youtube.com/@theSGKnight" class="social-link" target="_blank" rel="noopener">
+    <a href="https://www.youtube.com/@theSGKnight" class="social-link" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       <span>YouTube</span>
     </a>
-    <a href="https://www.instagram.com/thesgknight" class="social-link" target="_blank" rel="noopener">
+    <a href="https://www.instagram.com/thesgknight" class="social-link" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
       <span>Instagram</span>
     </a>
-    <a href="https://www.tiktok.com/@thesgknight_" class="social-link" target="_blank" rel="noopener">
+    <a href="https://www.tiktok.com/@thesgknight_" class="social-link" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
       <span>TikTok</span>
     </a>
-    <a href="https://x.com/asiantitstok" class="social-link" target="_blank" rel="noopener">
+    <a href="https://x.com/asiantitstok" class="social-link" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       <span>X</span>
     </a>
@@ -1121,7 +1253,8 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
       Latest Posts
     </h2>
     <div class="x-feed-actions">
-      <a href="https://x.com/asiantitstok" target="_blank" rel="noopener" class="x-handle">@asiantitstok</a>
+      <a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" class="x-handle">@asiantitstok</a>
+        <span class="x-live" id="xLive" style="display:none"></span>
       <div class="x-scroll-controls">
         <button class="x-scroll-btn" id="scrollLeft" aria-label="Scroll left"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
         <button class="x-scroll-btn" id="scrollRight" aria-label="Scroll right"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
@@ -1130,18 +1263,18 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
   </div>
 
   <div class="x-carousel-track" id="xCarousel">
-    <div class="x-post-card" data-index="0"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 1" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 5, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 142</span></div></div>
-    <div class="x-post-card" data-index="1"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 2" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 4, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 89</span></div></div>
-    <div class="x-post-card" data-index="2"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 3" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 3, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 203</span></div></div>
-    <div class="x-post-card" data-index="3"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 4" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 2, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 67</span></div></div>
-    <div class="x-post-card" data-index="4"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 5" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 1, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 156</span></div></div>
-    <div class="x-post-card" data-index="5"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 6" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 30, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 91</span></div></div>
-    <div class="x-post-card" data-index="6"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 7" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 29, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 178</span></div></div>
-    <div class="x-post-card" data-index="7"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 8" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 28, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 54</span></div></div>
-    <div class="x-post-card" data-index="8"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 9" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 27, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 112</span></div></div>
-    <div class="x-post-card" data-index="9"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 10" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 26, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 245</span></div></div>
-    <div class="x-post-card" data-index="10"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 11" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 25, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 301</span></div></div>
-    <div class="x-post-card" data-index="11"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 12" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 24, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 188</span></div></div>
+    <div class="x-post-card" data-index="0"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 1" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 5, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 142</span></div></div>
+    <div class="x-post-card" data-index="1"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 2" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 4, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 89</span></div></div>
+    <div class="x-post-card" data-index="2"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 3" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 3, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 203</span></div></div>
+    <div class="x-post-card" data-index="3"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 4" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 2, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 67</span></div></div>
+    <div class="x-post-card" data-index="4"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 5" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 1, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 156</span></div></div>
+    <div class="x-post-card" data-index="5"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 6" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 30, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 91</span></div></div>
+    <div class="x-post-card" data-index="6"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 7" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 29, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 178</span></div></div>
+    <div class="x-post-card" data-index="7"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 8" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 28, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 54</span></div></div>
+    <div class="x-post-card" data-index="8"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 9" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 27, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 112</span></div></div>
+    <div class="x-post-card" data-index="9"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 10" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 26, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 245</span></div></div>
+    <div class="x-post-card" data-index="10"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 11" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 25, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 301</span></div></div>
+    <div class="x-post-card" data-index="11"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 12" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 24, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 188</span></div></div>
   </div>
 
   <div class="x-progress-wrap">
@@ -1167,71 +1300,147 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
 <!-- MAIN -->
 <main class="main">
 
-  <!-- HIGHLIGHTS -->
+  <!--
+    HOW TO FILL A VIDEO SLOT
+    Find an empty slot card:
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div>...</div>
+    Replace the whole card with a real one (VIDEO_ID = the part after v= in a YouTube link):
+      <div class="video-card reveal">
+        <div class="video-embed"><iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Title" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        <div class="video-meta"><h3>Your title</h3><p>Your description</p></div>
+      </div>
+  -->
+
   <div class="tab-panel active" id="highlights">
     <p class="section-heading">Featured</p>
     <div class="video-grid">
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/6ig-hRjsJbU?si=aGNTXy760TsMjcgc" title="sozzlepopp poolside" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>sozzlepopp - by the poolside</h3><p>sophienicole sozpop natural blonde beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Q64LfVvCbr8?si=bFU-Jl4OI7o4GhJx" title="khaw18" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw18 - thai gamer girl</h3><p>woranachi khaw003 khunkhaw00 natural thai beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/oBwTzhP6cxQ" title="viptoriaa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Livestreaming</h3><p>asiancandy natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/6ig-hRjsJbU" title="sozzlepopp - by the poolside" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>sozzlepopp - by the poolside</h3><p>sophienicole sozpop natural blonde beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Q64LfVvCbr8" title="khaw18 - thai gamer girl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>khaw18 - thai gamer girl</h3><p>woranachi khaw003 khunkhaw00 natural thai beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/oBwTzhP6cxQ" title="viptoriaa - Livestreaming" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>viptoriaa - Livestreaming</h3><p>asiancandy natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/_nfOqynV5tM" title="viptoriaa - Outdoor Livestreaming" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>viptoriaa - Outdoor Livestreaming</h3><p>asiancandy natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/29VV8pUVk8o" title="SG babe Valerie - TikTok Shop" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>SG babe Valerie - TikTok Shop</h3><p>natural Singapore beauty</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 6</h3><p>Paste a YouTube embed to fill</p></div></div>
     </div>
     <div class="ad-mid"><div class="ad-slot"><div class="ad-placeholder"><span class="ad-label">Partner</span><span class="ad-size">970 &times; 100</span></div></div></div>
     <div class="video-grid">
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/_nfOqynV5tM" title="viptoriaa outdoor" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Outdoor Livestreaming</h3><p>asiancandy natural asian beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/29VV8pUVk8o" title="Valerie" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>SG babe Valerie - TikTok Shop</h3><p>natural Singapore beauty</p></div></div>
-      <div class="video-card ad-inline reveal"><div class="ad-placeholder" style="min-height:250px;"><span class="ad-label">Sponsored</span><span class="ad-size">300 &times; 250</span></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 7</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 8</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 9</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 10</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 11</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 12</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 13</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 14</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 15</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 16</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 17</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 18</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 19</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 20</h3><p>Paste a YouTube embed to fill</p></div></div>
     </div>
   </div>
 
-  <!-- KHAW18 -->
   <div class="tab-panel" id="khaw18">
     <p class="section-heading">khaw18</p>
     <div class="video-grid">
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Un4EvCVE10E" title="khaw 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 2</h3><p>natural thai beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/SBKXyLw17xw" title="khaw 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 3</h3><p>natural thai beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Q64LfVvCbr8" title="khaw 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 4</h3><p>REPLACE with your embed URL</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Un4EvCVE10E" title="khaw - thai gamer girl 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 2</h3><p>natural thai beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/SBKXyLw17xw" title="khaw - thai gamer girl 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 3</h3><p>natural thai beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/Q64LfVvCbr8" title="khaw - thai gamer girl 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>khaw - thai gamer girl 4</h3><p>natural thai beauty</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 4</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 5</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 6</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 7</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 8</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 9</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 10</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 11</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 12</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 13</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 14</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 15</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 16</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 17</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 18</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 19</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 20</h3><p>Paste a YouTube embed to fill</p></div></div>
     </div>
   </div>
 
-  <!-- SOZZLEPOPP -->
   <div class="tab-panel" id="sozzlepopp">
     <p class="section-heading">sozzlepopp</p>
     <div class="video-grid">
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/t63JGTf6r-s" title="sozzlepopp live" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>sozzlepopp - Livestreaming</h3><p>natural blonde beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/6ig-hRjsJbU" title="sozzlepopp pool" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>sozzlepopp - poolside chill</h3><p>natural blonde beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/t63JGTf6r-s" title="sozzlepopp - Livestreaming" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>sozzlepopp - Livestreaming</h3><p>natural blonde beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/6ig-hRjsJbU" title="sozzlepopp - poolside chill" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>sozzlepopp - poolside chill</h3><p>natural blonde beauty</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 3</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 4</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 5</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 6</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 7</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 8</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 9</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 10</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 11</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 12</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 13</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 14</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 15</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 16</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 17</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 18</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 19</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 20</h3><p>Paste a YouTube embed to fill</p></div></div>
     </div>
   </div>
 
-  <!-- VIPTORIAA -->
   <div class="tab-panel" id="viptoriaa">
     <p class="section-heading">viptoriaa</p>
     <div class="video-grid">
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/KbhquTfYf7U" title="viptoriaa pool" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - by the poolside</h3><p>natural asian beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/oBwTzhP6cxQ" title="viptoriaa live" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Live session</h3><p>asiancandy natural asian beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/_nfOqynV5tM" title="viptoriaa outdoor" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>viptoriaa - Outdoor</h3><p>natural asian beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/KbhquTfYf7U" title="viptoriaa - by the poolside" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>viptoriaa - by the poolside</h3><p>natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/oBwTzhP6cxQ" title="viptoriaa - Live session" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>viptoriaa - Live session</h3><p>asiancandy natural asian beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/_nfOqynV5tM" title="viptoriaa - Outdoor" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>viptoriaa - Outdoor</h3><p>natural asian beauty</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 4</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 5</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 6</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 7</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 8</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 9</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 10</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 11</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 12</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 13</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 14</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 15</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 16</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 17</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 18</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 19</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 20</h3><p>Paste a YouTube embed to fill</p></div></div>
     </div>
   </div>
 
-  <!-- SG BABES -->
   <div class="tab-panel" id="sgbabes">
     <p class="section-heading">SG babes</p>
     <div class="video-grid">
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/APfWc9zf8PA" title="graciehartie" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>graciehartie - Livestreaming</h3><p>natural Singapore beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/29VV8pUVk8o" title="Valerie" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>SG babe Valerie - TikTok Shop</h3><p>natural Singapore beauty</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
-      <div class="video-card reveal"><div class="video-embed"><iframe src="about:blank" title="Placeholder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><div class="video-meta"><h3>Video Title Here</h3><p>description here</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/APfWc9zf8PA" title="graciehartie - Livestreaming" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>graciehartie - Livestreaming</h3><p>natural Singapore beauty</p></div></div>
+      <div class="video-card reveal"><div class="video-embed"><iframe src="https://www.youtube.com/embed/29VV8pUVk8o" title="SG babe Valerie - TikTok Shop" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="video-meta"><h3>SG babe Valerie - TikTok Shop</h3><p>natural Singapore beauty</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 3</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 4</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 5</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 6</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 7</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 8</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 9</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 10</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 11</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 12</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 13</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 14</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 15</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 16</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 17</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 18</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 19</h3><p>Paste a YouTube embed to fill</p></div></div>
+      <div class="video-card video-slot reveal"><div class="video-embed empty"><span class="slot-hint">+ Add video</span></div><div class="video-meta"><h3>Video slot 20</h3><p>Paste a YouTube embed to fill</p></div></div>
     </div>
   </div>
 
@@ -1241,11 +1450,19 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
 <div class="ad-footer-wrap"><div class="ad-slot"><div class="ad-placeholder"><span class="ad-label">Partner</span><span class="ad-size">728 &times; 90</span></div></div></div>
 
 <!-- FOOTER -->
-<footer class="site-footer">
-  <span class="footer-copy">&copy; 2026 Asian TitsTok. Adults 18+ only.</span>
+<footer class="site-footer" id="dmca">
+  <div class="footer-main">
+    <span class="footer-copy">&copy; 2026 Asian TitsTok. All rights reserved.</span>
+    <p class="footer-disclaimer">Asian TitsTok links to and embeds publicly available social-media clips. All videos, images, names, and trademarks are the property of their respective owners. This site hosts no explicit media and is provided for entertainment only. 18+ only.</p>
+    <details class="footer-legal">
+      <summary>DMCA / Content Removal</summary>
+      <p>If you are a rights holder and want content that references you removed, send the URL and proof of ownership by DM to <a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer">@asiantitstok</a>. Verified requests are actioned promptly.</p>
+    </details>
+  </div>
   <nav class="footer-links">
     <a href="#">Privacy Policy</a>
-    <a href="https://x.com/asiantitstok" target="_blank">Contact</a>
+    <a href="#dmca">DMCA</a>
+    <a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer">Contact</a>
   </nav>
 </footer>
 
@@ -1259,185 +1476,406 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
   <img class="lightbox-img" id="lbImg" src="" alt="Full size">
   <button class="lb-btn lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
   <div class="lb-counter" id="lbCounter"></div>
+  <a class="lb-viewx" id="lbLink" target="_blank" rel="noopener noreferrer" aria-label="View on X">View on X ↗</a>
 </div>
 
 <script>
-(function() {
+(function () {
   'use strict';
 
-  // === AGE GATE ===
-  var ageGate = document.getElementById('ageGate');
-  if (localStorage.getItem('ageVerified') === 'true') {
-    ageGate.classList.add('hidden');
-    setTimeout(function() { ageGate.remove(); }, 600);
-  }
-  document.getElementById('ageYes').addEventListener('click', function() {
-    localStorage.setItem('ageVerified', 'true');
-    ageGate.classList.add('hidden');
-    setTimeout(function() { ageGate.remove(); }, 600);
-  });
-  document.getElementById('ageNo').addEventListener('click', function() {
-    window.location.href = 'https://www.google.com';
-  });
+  /* ============================================================
+     CONFIG  (override via window.SITE_CONFIG, set above in <body>)
+     ============================================================ */
+  var CONFIG = Object.assign({
+    xHandle: 'asiantitstok',
+    xFeedUrl: 'posts.json',
+    xFeedRefreshMs: 5 * 60 * 1000,
+    counterBase: 'https://abacus.jasoncameron.dev',
+    counterNamespace: 'asiantitstok.com',
+    counterKey: 'views',
+    counterPollMs: 20 * 1000,
+    hideEmptyVideos: false
+  }, window.SITE_CONFIG || {});
 
-  // === THEME TOGGLE ===
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
+  function fmt(n) { return Number(n).toLocaleString(); }
+
+  /* ============================================================
+     AGE GATE
+     ============================================================ */
+  var ageGate = $('ageGate');
+  function dismissGate() { ageGate.classList.add('hidden'); setTimeout(function () { if (ageGate) ageGate.remove(); }, 600); }
+  if (localStorage.getItem('ageVerified') === 'true') { dismissGate(); }
+  $('ageYes').addEventListener('click', function () { localStorage.setItem('ageVerified', 'true'); dismissGate(); });
+  $('ageNo').addEventListener('click', function () { window.location.href = 'https://www.google.com'; });
+
+  /* ============================================================
+     THEME TOGGLE
+     ============================================================ */
   var savedTheme = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
-  document.getElementById('themeToggle').addEventListener('click', function() {
-    var current = document.documentElement.getAttribute('data-theme');
-    var next = current === 'dark' ? 'light' : 'dark';
+  $('themeToggle').addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
   });
 
-  // === VIEW COUNTER ===
-  fetch('https://hits.sh/asiantitstok.com/hit.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var total = data.total || 888;
-      document.getElementById('visit-count').textContent = total.toLocaleString();
-      // Sync to stats
-      var viewStat = document.querySelector('.stat-number[data-target]');
-      if (viewStat) viewStat.setAttribute('data-target', total);
-    })
-    .catch(function() {
-      document.getElementById('visit-count').textContent = '888+';
-    });
+  /* ============================================================
+     LIVE VIEW COUNTER
+     Abacus (free, CORS, {value:N}). Hit once per browser session,
+     then poll read-only so the number ticks up live as others visit.
+     Falls back to the site's original hits.sh counter.
+     ============================================================ */
+  var viewEl = $('visit-count');
+  var liveDot = $('liveDot');
+  var totalStat = document.querySelector('.stat-number[data-target]');
+  var displayed = 0, targetCount = null;
 
-  // === STATS COUNTERS ===
+  function tweenCount(to) {
+    if (reduceMotion) { displayed = to; viewEl.textContent = fmt(to); return; }
+    var from = displayed, start = null, dur = 900;
+    function step(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      displayed = Math.round(from + (to - from) * eased);
+      viewEl.textContent = fmt(displayed);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function setCount(n) {
+    if (typeof n !== 'number' || isNaN(n)) return;
+    targetCount = n;
+    tweenCount(n);
+    if (totalStat) totalStat.setAttribute('data-target', String(n)); // keep the stats block in sync
+  }
+  function pulse() {
+    if (!liveDot) return;
+    liveDot.classList.remove('ping'); void liveDot.offsetWidth; liveDot.classList.add('ping');
+  }
+  function counterUrl(kind) {
+    return CONFIG.counterBase + '/' + kind + '/' +
+      encodeURIComponent(CONFIG.counterNamespace) + '/' + encodeURIComponent(CONFIG.counterKey);
+  }
+  function readCount(kind) {
+    return fetch(counterUrl(kind), { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { return (d && typeof d.value === 'number') ? d.value : null; });
+  }
+  function fallbackCount() {
+    fetch('https://hits.sh/asiantitstok.com/hit.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { setCount(d.total || 888); })
+      .catch(function () { viewEl.textContent = '888+'; if (liveDot) liveDot.style.display = 'none'; });
+  }
+  (function initCounter() {
+    var firstHit = !sessionStorage.getItem('vc_counted');
+    readCount(firstHit ? 'hit' : 'get')
+      .then(function (v) {
+        if (v === null) { fallbackCount(); return; }
+        if (firstHit) sessionStorage.setItem('vc_counted', '1');
+        setCount(v);
+        if (CONFIG.counterPollMs > 0) {
+          setInterval(function () {
+            readCount('get').then(function (v2) {
+              if (v2 !== null && v2 !== targetCount) { setCount(v2); pulse(); }
+            }).catch(function () {});
+          }, CONFIG.counterPollMs);
+        }
+      })
+      .catch(fallbackCount);
+  })();
+
+  /* ============================================================
+     STATS COUNTERS (animate on scroll-in)
+     ============================================================ */
   function animateCounters() {
-    document.querySelectorAll('.stat-number[data-target]').forEach(function(el) {
-      var target = parseInt(el.getAttribute('data-target'));
+    document.querySelectorAll('.stat-number[data-target]').forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-target'), 10) || 0;
       var suffix = el.getAttribute('data-suffix') || '';
-      var start = performance.now();
-      var duration = 2000;
-      function update(now) {
-        var elapsed = now - start;
-        var progress = Math.min(elapsed / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 4);
+      if (reduceMotion) { el.textContent = target.toLocaleString() + suffix; return; }
+      var start = performance.now(), duration = 2000;
+      (function update(now) {
+        var p = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 4);
         el.textContent = Math.round(eased * target).toLocaleString() + suffix;
-        if (progress < 1) requestAnimationFrame(update);
-      }
-      requestAnimationFrame(update);
+        if (p < 1) requestAnimationFrame(update);
+      })(start);
     });
   }
-
-  var statsObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
+  var statsObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
       if (entry.isIntersecting) { animateCounters(); statsObs.unobserve(entry.target); }
     });
   }, { threshold: 0.3 });
   var statsEl = document.querySelector('.stats-section');
   if (statsEl) statsObs.observe(statsEl);
 
-  // === BANNER PARALLAX (desktop only) ===
-  var bannerImg = document.getElementById('bannerImg');
-  if (window.matchMedia('(hover: hover)').matches) {
+  /* ============================================================
+     BANNER PARALLAX (desktop, motion-ok)
+     ============================================================ */
+  var bannerImg = $('bannerImg');
+  if (bannerImg && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
     var ticking = false;
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       if (!ticking) {
-        requestAnimationFrame(function() {
-          var scroll = window.scrollY;
-          if (scroll < 600) bannerImg.style.transform = 'translateY(' + (scroll * 0.3) + 'px)';
+        requestAnimationFrame(function () {
+          var s = window.scrollY;
+          if (s < 600) bannerImg.style.transform = 'translateY(' + (s * 0.3) + 'px)';
           ticking = false;
         });
         ticking = true;
       }
-    });
+    }, { passive: true });
   }
 
-  // === TABS ===
+  /* ============================================================
+     TABS
+     ============================================================ */
   var tabs = document.querySelectorAll('.tab');
   var panels = document.querySelectorAll('.tab-panel');
-  tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      tabs.forEach(function(t) { t.classList.remove('active'); });
-      panels.forEach(function(p) { p.classList.remove('active'); });
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      panels.forEach(function (p) { p.classList.remove('active'); });
       tab.classList.add('active');
-      document.getElementById(tab.dataset.tab).classList.add('active');
+      var panel = $(tab.dataset.tab); if (panel) panel.classList.add('active');
       observeReveals();
     });
   });
 
-  // === X CAROUSEL ===
-  var carousel = document.getElementById('xCarousel');
-  var progressFill = document.getElementById('scrollProgress');
-  var statusEl = document.getElementById('scrollStatus');
-  var cards = document.querySelectorAll('.x-post-card');
+  /* ============================================================
+     X FEED  — render cards from a data feed (posts.json / Worker).
+     On any error we keep the seed cards already in the HTML.
+     ============================================================ */
+  var track = $('xCarousel');
+  var xLive = $('xLive');
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var HEART = '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+  var PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+  function fmtDate(d) {
+    if (!d) return '';
+    var dt = new Date(d);
+    if (isNaN(dt.getTime())) return esc(d);
+    return MONTHS[dt.getMonth()] + ' ' + dt.getDate() + ', ' + dt.getFullYear();
+  }
+  function relTime(iso) {
+    if (!iso) return '';
+    var dt = new Date(iso); if (isNaN(dt.getTime())) return '';
+    var mins = Math.round((Date.now() - dt.getTime()) / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return mins + 'm ago';
+    var hrs = Math.round(mins / 60); if (hrs < 24) return hrs + 'h ago';
+    return Math.round(hrs / 24) + 'd ago';
+  }
+  function safeUrl(u, fallback) {
+    u = String(u == null ? '' : u).trim();
+    return /^https:\/\//i.test(u) ? u : (fallback || '');   // only allow https URLs from the feed
+  }
+  function tweetHref(p) {
+    var h = 'https://x.com/' + encodeURIComponent(CONFIG.xHandle);
+    if (p.url) return safeUrl(p.url, h);
+    if (p.id) return h + '/status/' + encodeURIComponent(p.id);
+    return h;
+  }
+  function renderXPosts(posts) {
+    var html = posts.map(function (p, i) {
+      var type = p.type || 'photo';
+      var img = safeUrl((type === 'video') ? (p.poster || p.media) : (p.media || p.poster));
+      if (!img) return '';
+      var full = safeUrl(p.media || img) || img;
+      var href = tweetHref(p);
+      var badge = (type === 'video' || type === 'animated_gif')
+        ? '<span class="x-play">' + PLAY + '</span>' : '';
+      var likes = (p.likes != null)
+        ? '<span class="post-likes">' + HEART + ' ' + fmt(p.likes) + '</span>'
+        : '<span class="post-likes"></span>';
+      var label = esc(p.text || ('Post ' + (i + 1)));
+      return '<div class="x-post-card" data-index="' + i + '" data-full="' + esc(full) +
+               '" data-href="' + esc(href) + '" data-type="' + esc(type) +
+               '" role="button" tabindex="0" aria-label="' + label + '">' +
+               '<img src="' + esc(img) + '" alt="' + label + '" loading="lazy" decoding="async">' +
+               badge +
+               '<div class="x-post-overlay"><span class="post-date">' + esc(fmtDate(p.date)) + '</span>' + likes + '</div>' +
+             '</div>';
+    }).join('');
+    if (!html) return;
+    track.innerHTML = html;
+    bindCards();
+    var xStat = document.querySelectorAll('.stat-number[data-target]')[2]; // "X Posts" stat
+    if (xStat) xStat.setAttribute('data-target', String(posts.length));
+    updateProgress();
+  }
+  function updateXMeta(data) {
+    if (!xLive) return;
+    var when = data && data.updated ? relTime(data.updated) : '';
+    xLive.innerHTML = '<span class="live-dot"></span> LIVE' + (when ? ' &middot; ' + when : '');
+    xLive.style.display = '';
+  }
+  function loadFeed() {
+    if (!CONFIG.xFeedUrl) return;
+    var url = CONFIG.xFeedUrl + (CONFIG.xFeedUrl.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now();
+    fetch(url, { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (data) {
+        var posts = Array.isArray(data) ? data : (data.posts || []);
+        if (posts.length) { renderXPosts(posts); updateXMeta(Array.isArray(data) ? {} : data); }
+      })
+      .catch(function () { /* keep the seed cards already in the DOM */ });
+  }
+  loadFeed();
+  if (CONFIG.xFeedRefreshMs > 0) setInterval(loadFeed, CONFIG.xFeedRefreshMs);
+
+  /* ============================================================
+     X CAROUSEL (auto-scroll + controls + progress bar)
+     ============================================================ */
+  var progressFill = $('scrollProgress');
+  var statusEl = $('scrollStatus');
   var isPaused = false;
 
   function updateProgress() {
-    var max = carousel.scrollWidth - carousel.clientWidth;
-    progressFill.style.width = (max > 0 ? (carousel.scrollLeft / max) * 100 : 0) + '%';
+    var max = track.scrollWidth - track.clientWidth;
+    progressFill.style.width = (max > 0 ? (track.scrollLeft / max) * 100 : 0) + '%';
   }
-  carousel.addEventListener('scroll', updateProgress);
+  track.addEventListener('scroll', updateProgress, { passive: true });
 
   function autoScroll() {
     if (!isPaused) {
-      carousel.scrollLeft += 0.7;
-      if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 2) carousel.scrollLeft = 0;
+      track.scrollLeft += 0.7;
+      if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) track.scrollLeft = 0;
     }
     requestAnimationFrame(autoScroll);
   }
+  function pause() { isPaused = true; if (statusEl) statusEl.textContent = 'Paused'; }
+  function resume() { isPaused = false; if (statusEl) statusEl.textContent = 'Auto-scrolling'; }
 
-  function pause() { isPaused = true; statusEl.textContent = 'Paused'; }
-  function resume() { isPaused = false; statusEl.textContent = 'Auto-scrolling'; }
+  track.addEventListener('mouseenter', pause);
+  track.addEventListener('mouseleave', resume);
+  track.addEventListener('touchstart', pause, { passive: true });
+  track.addEventListener('touchend', function () { setTimeout(resume, 3000); });
+  $('scrollLeft').addEventListener('click', function () { track.scrollBy({ left: -260, behavior: 'smooth' }); pause(); setTimeout(resume, 4000); });
+  $('scrollRight').addEventListener('click', function () { track.scrollBy({ left: 260, behavior: 'smooth' }); pause(); setTimeout(resume, 4000); });
 
-  carousel.addEventListener('mouseenter', pause);
-  carousel.addEventListener('mouseleave', resume);
-  carousel.addEventListener('touchstart', pause, { passive: true });
-  carousel.addEventListener('touchend', function() { setTimeout(resume, 3000); });
-
-  document.getElementById('scrollLeft').addEventListener('click', function() { carousel.scrollBy({ left: -260, behavior: 'smooth' }); pause(); setTimeout(resume, 4000); });
-  document.getElementById('scrollRight').addEventListener('click', function() { carousel.scrollBy({ left: 260, behavior: 'smooth' }); pause(); setTimeout(resume, 4000); });
-
-  requestAnimationFrame(autoScroll);
+  if (!reduceMotion) requestAnimationFrame(autoScroll);
+  else if (statusEl) statusEl.textContent = 'Swipe to browse';
   updateProgress();
 
-  // === LIGHTBOX ===
-  var lightbox = document.getElementById('lightbox');
-  var lbImg = document.getElementById('lbImg');
-  var lbCounter = document.getElementById('lbCounter');
-  var images = Array.from(cards).map(function(c) { return c.querySelector('img').src; });
+  /* ============================================================
+     LIGHTBOX  (photos open here; video posts open the tweet on X)
+     Reads live cards so it works after the feed re-renders.
+     ============================================================ */
+  var lightbox = $('lightbox');
+  var lbImg = $('lbImg');
+  var lbCounter = $('lbCounter');
+  var lbLink = $('lbLink');
+  var photoCards = [];
   var lbIndex = 0;
 
-  function openLB(i) { lbIndex = i; lbImg.src = images[lbIndex]; lbCounter.textContent = (lbIndex+1)+' / '+images.length; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function currentPhotos() {
+    return Array.prototype.filter.call(track.querySelectorAll('.x-post-card'), function (c) {
+      return (c.getAttribute('data-type') || 'photo') !== 'video';
+    });
+  }
+  function showLB() {
+    var card = photoCards[lbIndex];
+    if (!card) return;
+    var imgEl = card.querySelector('img');
+    var full = card.getAttribute('data-full') || (imgEl ? imgEl.src : '');
+    var href = card.getAttribute('data-href');
+    lbImg.src = full;
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + photoCards.length;
+    if (lbLink) {
+      if (href) { lbLink.href = href; lbLink.style.display = ''; }
+      else { lbLink.style.display = 'none'; }
+    }
+  }
+  function openLB(card) {
+    photoCards = currentPhotos();
+    lbIndex = photoCards.indexOf(card);
+    if (lbIndex < 0) return;
+    showLB();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
   function closeLB() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
-  function prevLB() { lbIndex = (lbIndex-1+images.length)%images.length; lbImg.src = images[lbIndex]; lbCounter.textContent = (lbIndex+1)+' / '+images.length; }
-  function nextLB() { lbIndex = (lbIndex+1)%images.length; lbImg.src = images[lbIndex]; lbCounter.textContent = (lbIndex+1)+' / '+images.length; }
+  function prevLB() { lbIndex = (lbIndex - 1 + photoCards.length) % photoCards.length; showLB(); }
+  function nextLB() { lbIndex = (lbIndex + 1) % photoCards.length; showLB(); }
 
-  cards.forEach(function(card, i) { card.addEventListener('click', function(e) { if (e.target.closest('a')) return; openLB(i); }); });
-  document.getElementById('lbClose').addEventListener('click', closeLB);
-  document.getElementById('lbPrev').addEventListener('click', prevLB);
-  document.getElementById('lbNext').addEventListener('click', nextLB);
-  lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLB(); });
-  document.addEventListener('keydown', function(e) { if (!lightbox.classList.contains('active')) return; if (e.key==='Escape') closeLB(); if (e.key==='ArrowLeft') prevLB(); if (e.key==='ArrowRight') nextLB(); });
+  function bindCards() {
+    track.querySelectorAll('.x-post-card').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return;                 // let real links (seed cards) work
+        var type = card.getAttribute('data-type') || 'photo';
+        var href = card.getAttribute('data-href');
+        if (type === 'video') { if (href) window.open(href, '_blank', 'noopener'); return; }
+        openLB(card);
+      });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+      });
+    });
+  }
+  bindCards(); // bind the seed cards that ship in the HTML
 
-  // Swipe support for lightbox on mobile
+  $('lbClose').addEventListener('click', closeLB);
+  $('lbPrev').addEventListener('click', prevLB);
+  $('lbNext').addEventListener('click', nextLB);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLB(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLB();
+    if (e.key === 'ArrowLeft') prevLB();
+    if (e.key === 'ArrowRight') nextLB();
+  });
   var touchStartX = 0;
-  lbImg.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
-  lbImg.addEventListener('touchend', function(e) {
+  lbImg.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lbImg.addEventListener('touchend', function (e) {
     var diff = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(diff) > 50) { diff > 0 ? prevLB() : nextLB(); }
   });
 
-  // === BACK TO TOP ===
-  var btt = document.getElementById('backToTop');
-  window.addEventListener('scroll', function() { btt.classList.toggle('visible', window.scrollY > 400); });
-  btt.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  /* ============================================================
+     HIDE UNFINISHED VIDEO SLOTS (about:blank iframes)
+     ============================================================ */
+  if (CONFIG.hideEmptyVideos) {
+    document.querySelectorAll('.video-card .video-embed iframe').forEach(function (f) {
+      var src = f.getAttribute('src') || '';
+      if (src === 'about:blank' || src === '') {
+        var card = f.closest('.video-card');
+        if (card) card.remove();
+      }
+    });
+  }
 
-  // === SCROLL REVEAL ===
+  /* ============================================================
+     BACK TO TOP
+     ============================================================ */
+  var btt = $('backToTop');
+  window.addEventListener('scroll', function () { btt.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+  btt.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
   function observeReveals() {
     var reveals = document.querySelectorAll('.reveal:not(.visible)');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry, i) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
         if (entry.isIntersecting) {
-          setTimeout(function() { entry.target.classList.add('visible'); }, i * 80);
+          setTimeout(function () { entry.target.classList.add('visible'); }, i * 80);
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
-    reveals.forEach(function(el) { observer.observe(el); });
+    reveals.forEach(function (el) { observer.observe(el); });
   }
   observeReveals();
 })();
