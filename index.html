@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-75M3EK7TCN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-75M3EK7TCN');
-</script>
 <!-- skill:chrome -->
 <style>
 /* Credit line — bottom-right */
@@ -60,7 +51,7 @@
         var credit = document.createElement('div');
         credit.className = 'design-ui-credit';
         credit.setAttribute('aria-hidden', 'true');
-        credit.innerHTML = '\u{1F49C} by facelesskapp';
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
         document.body.appendChild(credit);
 
         var timer = null;
@@ -135,10 +126,12 @@ gtag('config', 'G-75M3EK7TCN');
 /* ===== CUSTOM CURSOR (desktop only) ===== */
 @media (hover: hover) and (pointer: fine) {
   html, body {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23c9a96e' stroke-width='1.5' opacity='0.8'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23c9a96e' opacity='0.9'/%3E%3C/svg%3E") 12 12, auto;
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%279%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%272%27%20opacity%3D%270.18%27%2F%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%279%27%20fill%3D%27none%27%20stroke%3D%27%23c9a96e%27%20stroke-width%3D%271%27%20opacity%3D%270.75%27%2F%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%272.4%27%20fill%3D%27%23c9a96e%27%2F%3E%3C%2Fsvg%3E") 12 12, auto;
   }
-  a, button, .x-post-card, .video-card {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='12' fill='%23c9a96e' opacity='0.15'/%3E%3Ccircle cx='14' cy='14' r='8' fill='none' stroke='%23c9a96e' stroke-width='1.5' opacity='0.9'/%3E%3Ccircle cx='14' cy='14' r='3' fill='%23c9a96e'/%3E%3C/svg%3E") 14 14, pointer;
+  a, button, [role="button"], summary, label,
+  .x-post-card, .video-card, .tab, .theme-toggle, .kofi-btn, .social-link,
+  .x-scroll-btn, .lb-btn, .back-to-top, .age-btn, .footer-links a {
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2028%2028%27%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2714%27%20r%3D%2711%27%20fill%3D%27%23c9a96e%27%20opacity%3D%270.12%27%2F%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2714%27%20r%3D%2710%27%20fill%3D%27none%27%20stroke%3D%27%23000%27%20stroke-width%3D%272%27%20opacity%3D%270.15%27%2F%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2714%27%20r%3D%2710%27%20fill%3D%27none%27%20stroke%3D%27%23c9a96e%27%20stroke-width%3D%271.25%27%20opacity%3D%270.9%27%2F%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2714%27%20r%3D%273%27%20fill%3D%27%23c9a96e%27%2F%3E%3C%2Fsvg%3E") 14 14, pointer;
   }
 }
 
@@ -1142,6 +1135,7 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
 .footer-legal p { margin-top: 8px; line-height: 1.65; }
 .footer-legal a { color: var(--gold-dim); }
 .footer-legal a:hover { color: var(--gold); }
+a.x-post-card { text-decoration: none; color: inherit; }
 </style>
 </head>
 <body>
@@ -1154,7 +1148,7 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
 <script>
   window.SITE_CONFIG = {
     xHandle: 'asiantitstok',              // your X username (without the @)
-    xFeedUrl: 'posts.json',               // static feed file, OR your Worker URL
+    xFeedUrl: '',                         // '' = use the fixed cards in the HTML below (no API, no server). Set to 'posts.json' or a Worker URL to auto-update instead.
                                           //   e.g. 'https://xfeed.YOURNAME.workers.dev'
     xFeedRefreshMs: 5 * 60 * 1000,        // re-pull the feed every 5 min (0 = load once)
     counterNamespace: 'asiantitstok.com', // view-counter bucket — keep this stable to keep the number
@@ -1271,19 +1265,46 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
     </div>
   </div>
 
+    <!--
+    ADD OR EDIT A POST CARD  (fixed, no API, stays for life)
+    1. Open the post on x.com.
+    2. Right-click the image -> "Copy image address"  (you get a https://pbs.twimg.com/... link) -> paste it as src.
+    3. Copy the post URL from the address bar -> paste it as href.
+    Copy one <a class="x-post-card"> block per post. Delete any you do not need.
+  -->
   <div class="x-carousel-track" id="xCarousel">
-    <div class="x-post-card" data-index="0"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 1" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 5, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 142</span></div></div>
-    <div class="x-post-card" data-index="1"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 2" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 4, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 89</span></div></div>
-    <div class="x-post-card" data-index="2"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 3" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 3, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 203</span></div></div>
-    <div class="x-post-card" data-index="3"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 4" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 2, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 67</span></div></div>
-    <div class="x-post-card" data-index="4"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 5" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jul 1, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 156</span></div></div>
-    <div class="x-post-card" data-index="5"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 6" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 30, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 91</span></div></div>
-    <div class="x-post-card" data-index="6"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 7" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 29, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 178</span></div></div>
-    <div class="x-post-card" data-index="7"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 8" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 28, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 54</span></div></div>
-    <div class="x-post-card" data-index="8"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 9" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 27, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 112</span></div></div>
-    <div class="x-post-card" data-index="9"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 10" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 26, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 245</span></div></div>
-    <div class="x-post-card" data-index="10"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 11" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 25, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 301</span></div></div>
-    <div class="x-post-card" data-index="11"><a href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer"><img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Post 12" loading="lazy"></a><div class="x-post-overlay"><span class="post-date">Jun 24, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 188</span></div></div>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jul 5, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 142</span></div>
+    </a>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jul 4, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 89</span></div>
+    </a>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jul 3, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 203</span></div>
+    </a>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jul 2, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 67</span></div>
+    </a>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jul 1, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 156</span></div>
+    </a>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jun 30, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 91</span></div>
+    </a>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jun 29, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 178</span></div>
+    </a>
+    <a class="x-post-card" href="https://x.com/asiantitstok" target="_blank" rel="noopener noreferrer" aria-label="Latest post">
+      <img src="https://i.postimg.cc/4d0MrQ1X/11.jpg" alt="Latest post" loading="lazy" decoding="async">
+      <div class="x-post-overlay"><span class="post-date">Jun 28, 2026</span><span class="post-likes"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> 245</span></div>
+    </a>
   </div>
 
   <div class="x-progress-wrap">
@@ -1708,13 +1729,12 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
         ? '<span class="post-likes">' + HEART + ' ' + fmt(p.likes) + '</span>'
         : '<span class="post-likes"></span>';
       var label = esc(p.text || ('Post ' + (i + 1)));
-      return '<div class="x-post-card" data-index="' + i + '" data-full="' + esc(full) +
-               '" data-href="' + esc(href) + '" data-type="' + esc(type) +
-               '" role="button" tabindex="0" aria-label="' + label + '">' +
+      return '<a class="x-post-card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer"' +
+               ' data-type="' + esc(type) + '" aria-label="' + label + '">' +
                '<img src="' + esc(img) + '" alt="' + label + '" loading="lazy" decoding="async">' +
                badge +
                '<div class="x-post-overlay"><span class="post-date">' + esc(fmtDate(p.date)) + '</span>' + likes + '</div>' +
-             '</div>';
+             '</a>';
     }).join('');
     if (!html) return;
     track.innerHTML = html;
@@ -1820,6 +1840,7 @@ h1, h2, h3, .section-heading { font-family: 'Cormorant Garamond', serif; }
 
   function bindCards() {
     track.querySelectorAll('.x-post-card').forEach(function (card) {
+      if (card.tagName === 'A') return;   // anchor cards link to the post natively
       card.addEventListener('click', function (e) {
         if (e.target.closest('a')) return;                 // let real links (seed cards) work
         var type = card.getAttribute('data-type') || 'photo';
